@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef } from "react";
-import { Html, Line, Sparkles, Text } from "@react-three/drei";
+import { Environment, Html, Lightformer, Line, Sparkles, Text } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { gsap } from "gsap";
 import { AdditiveBlending, Group, Mesh, Vector3 } from "three";
@@ -10,6 +10,7 @@ import { useSceneStore } from "@/lib/scene-store";
 import { getColorByKey } from "@/lib/scene-utils";
 import type { SceneNode, Zone } from "@/lib/types";
 import {
+  AsteroidRock,
   CrystalPortalHalo,
   HumanoidBust,
   NodeModel,
@@ -17,8 +18,8 @@ import {
   SelectedMemoryShard
 } from "./scene-models";
 
-const UNIVERSE_SCALE = 1.28;
-const coreTarget = new Vector3(0, 0, 10.6);
+const UNIVERSE_SCALE = 1.44;
+const coreTarget = new Vector3(0, 0.25, 13.8);
 
 function scalePosition(position: [number, number, number]): [number, number, number] {
   return [position[0] * UNIVERSE_SCALE, position[1] * UNIVERSE_SCALE, position[2] * UNIVERSE_SCALE];
@@ -116,8 +117,8 @@ export function SceneStage() {
       const desired = targetNode
         ? new Vector3(
             targetNode.position[0] * UNIVERSE_SCALE,
-            targetNode.position[1] * UNIVERSE_SCALE,
-            isMobile ? 10.4 : 8.6
+            targetNode.position[1] * UNIVERSE_SCALE + 0.2,
+            isMobile ? 11.8 : 10.2
           )
         : coreTarget;
 
@@ -139,10 +140,18 @@ export function SceneStage() {
 
   return (
     <>
-      <ambientLight intensity={0.55} />
-      <directionalLight color="#7bd9ff" intensity={2.2} position={[4, 6, 5]} />
-      <directionalLight color="#ff8948" intensity={1.4} position={[-4, -2, 3]} />
-      <pointLight color="#9be8ff" intensity={7} position={[0, 1.7, 0.35]} />
+      <ambientLight intensity={0.22} />
+      <hemisphereLight args={["#8ad7ff", "#050910", 0.42]} position={[0, 4, 0]} />
+      <directionalLight castShadow color="#9edfff" intensity={2.6} position={[8, 10, 7]} />
+      <directionalLight color="#ff9058" intensity={1.6} position={[-7, -2, 5]} />
+      <pointLight color="#9be8ff" intensity={3.6} position={[0, 2.3, 1.8]} />
+      <pointLight color="#ffd36a" intensity={2.2} position={[0, 3.1, 1.1]} />
+      <Environment resolution={256}>
+        <Lightformer color="#7bd9ff" form="ring" intensity={2.6} position={[-9, 4, 5]} scale={[8, 8, 1]} />
+        <Lightformer color="#ff9e61" form="ring" intensity={1.9} position={[9, 1, 4]} scale={[7, 7, 1]} />
+        <Lightformer color="#ffffff" form="rect" intensity={1.1} position={[0, 8, -6]} scale={[15, 8, 1]} />
+        <Lightformer color="#5dbfff" form="rect" intensity={0.9} position={[-12, -2, -2]} scale={[10, 4, 1]} />
+      </Environment>
 
       <group ref={groupRef}>
         {introPhase !== "universe" ? (
@@ -165,7 +174,7 @@ export function SceneStage() {
               speed={0.35}
             />
             <mesh position={[0, -3.25, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-              <circleGeometry args={[13.5, 64]} />
+              <circleGeometry args={[16.5, 72]} />
               <meshBasicMaterial color="#061220" opacity={0.18} transparent />
             </mesh>
 
@@ -198,15 +207,15 @@ function ZoneAtmospheres() {
     <group>
       <HemisphereAura
         color="#43c6ff"
-        position={[-5.8 * UNIVERSE_SCALE, 0.15, -1.9]}
-        scale={[9.1, 5.5, 1]}
+        position={[-6.4 * UNIVERSE_SCALE, 0.2, -3.6]}
+        scale={[10.8, 6.2, 2.4]}
       />
       <HemisphereAura
         color="#ff8f52"
-        position={[5.8 * UNIVERSE_SCALE, 0.15, -1.9]}
-        scale={[9.1, 5.5, 1]}
+        position={[6.4 * UNIVERSE_SCALE, 0.15, -3.6]}
+        scale={[10.8, 6.2, 2.4]}
       />
-      <HemisphereAura color="#9be8ff" position={[0, 0.05, -1.4]} scale={[5.6, 3.8, 1]} />
+      <HemisphereAura color="#9be8ff" position={[0, 0.1, -2.4]} scale={[6.8, 4.4, 1.8]} />
       <CorePulse />
     </group>
   );
@@ -246,7 +255,7 @@ function HemisphereAura({
       <meshBasicMaterial
         blending={AdditiveBlending}
         color={color}
-        opacity={0.075}
+        opacity={0.085}
         transparent
       />
     </mesh>
@@ -257,11 +266,11 @@ function CorePulse() {
   return (
     <group position={[0, 0, -0.4]}>
       <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <ringGeometry args={[2.2, 2.42, 72]} />
+        <ringGeometry args={[2.6, 2.88, 72]} />
         <meshBasicMaterial color="#9be8ff" opacity={0.24} transparent />
       </mesh>
       <mesh rotation={[Math.PI / 2, 0.22, 0]}>
-        <ringGeometry args={[3.15, 3.32, 72]} />
+        <ringGeometry args={[3.7, 3.92, 72]} />
         <meshBasicMaterial color="#ffd36a" opacity={0.12} transparent />
       </mesh>
     </group>
@@ -442,25 +451,17 @@ function AsteroidFields() {
         return (
           <group key={field.id} position={scalePosition(anchor.position)}>
             {field.offsets.map((offset, index) => (
-              <mesh
+              <AsteroidRock
+                color={field.color}
                 key={`${field.id}-asteroid-${index}`}
                 position={offset as [number, number, number]}
                 rotation={[0.24 * (index + 1), 0.18 * index, 0.12 * (index + 2)]}
                 scale={[
-                  0.16 + index * 0.02,
-                  0.12 + (index % 2) * 0.04,
-                  0.12 + ((index + 1) % 3) * 0.03
+                  0.22 + index * 0.03,
+                  0.16 + (index % 2) * 0.05,
+                  0.17 + ((index + 1) % 3) * 0.04
                 ]}
-              >
-                <icosahedronGeometry args={[1, 1]} />
-                <meshStandardMaterial
-                  color={field.color}
-                  emissive="#11161f"
-                  emissiveIntensity={0.12}
-                  metalness={0.08}
-                  roughness={0.86}
-                />
-              </mesh>
+              />
             ))}
           </group>
         );

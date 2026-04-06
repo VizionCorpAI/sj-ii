@@ -15,7 +15,7 @@ export function CosmicScene() {
   return (
     <div className={styles.canvasWrap}>
       <Canvas
-        camera={{ fov: 48, near: 0.1, far: 100, position: [0, 0, 13.5] }}
+        camera={{ fov: 52, near: 0.1, far: 140, position: [0, 0.3, 15.5] }}
         dpr={[1, 1.75]}
       >
         <color attach="background" args={["#030712"]} />
@@ -37,9 +37,9 @@ export function CosmicScene() {
             enableDamping
             dampingFactor={0.08}
             enablePan={false}
-            maxDistance={25}
+            maxDistance={32}
             maxPolarAngle={Math.PI * 0.72}
-            minDistance={8}
+            minDistance={10}
             minPolarAngle={Math.PI * 0.28}
           />
         </Suspense>

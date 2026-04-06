@@ -6,17 +6,24 @@ import type { Mesh } from "three";
 import { AdditiveBlending } from "three";
 import { getColorByKey } from "@/lib/scene-utils";
 import type { ColorKey, SceneNode, Zone } from "@/lib/types";
+import { getProceduralTextureSet } from "./procedural-textures";
 
 export function HumanoidBust({ crystalRef }: { crystalRef: RefObject<Mesh | null> }) {
+  const humanoidMetal = getProceduralTextureSet("humanoid-metal");
+  const goldMetal = getProceduralTextureSet("gold-metal");
+
   return (
     <group>
       <group position={[0, 0.04, -0.22]}>
         <mesh position={[0, -0.44, -0.12]} rotation={[0.08, 0, 0]} scale={[2.85, 1.38, 1.52]}>
           <icosahedronGeometry args={[1, 3]} />
           <meshStandardMaterial
+            bumpMap={humanoidMetal.bump}
+            bumpScale={0.08}
             color="#5e1324"
             emissive="#2d0815"
             emissiveIntensity={0.72}
+            map={humanoidMetal.map}
             metalness={0.58}
             roughness={0.26}
           />
@@ -24,9 +31,12 @@ export function HumanoidBust({ crystalRef }: { crystalRef: RefObject<Mesh | null
         <mesh position={[0, 0.82, 0.02]} rotation={[0.14, 0, 0]} scale={[1.28, 0.9, 0.6]}>
           <capsuleGeometry args={[0.72, 1.72, 14, 28]} />
           <meshStandardMaterial
+            bumpMap={humanoidMetal.bump}
+            bumpScale={0.06}
             color="#a3263b"
             emissive="#4a0f1d"
             emissiveIntensity={0.74}
+            map={humanoidMetal.map}
             metalness={0.54}
             roughness={0.22}
           />
@@ -34,9 +44,12 @@ export function HumanoidBust({ crystalRef }: { crystalRef: RefObject<Mesh | null
         <mesh position={[0, 0.48, 0.52]} rotation={[0.54, 0, 0]} scale={[0.92, 0.38, 0.2]}>
           <sphereGeometry args={[1, 28, 28]} />
           <meshStandardMaterial
+            bumpMap={goldMetal.bump}
+            bumpScale={0.04}
             color="#c8933b"
             emissive="#694314"
             emissiveIntensity={0.52}
+            map={goldMetal.map}
             metalness={0.72}
             roughness={0.18}
           />
@@ -44,9 +57,12 @@ export function HumanoidBust({ crystalRef }: { crystalRef: RefObject<Mesh | null
         <mesh position={[-1.62, 0.86, -0.12]} rotation={[0.2, 0.08, -0.88]} scale={[0.66, 1.32, 0.74]}>
           <capsuleGeometry args={[0.48, 1.56, 12, 20]} />
           <meshStandardMaterial
+            bumpMap={humanoidMetal.bump}
+            bumpScale={0.06}
             color="#6f1628"
             emissive="#330814"
             emissiveIntensity={0.58}
+            map={humanoidMetal.map}
             metalness={0.64}
             roughness={0.24}
           />
@@ -54,27 +70,33 @@ export function HumanoidBust({ crystalRef }: { crystalRef: RefObject<Mesh | null
         <mesh position={[1.62, 0.86, -0.12]} rotation={[0.2, -0.08, 0.88]} scale={[0.66, 1.32, 0.74]}>
           <capsuleGeometry args={[0.48, 1.56, 12, 20]} />
           <meshStandardMaterial
+            bumpMap={humanoidMetal.bump}
+            bumpScale={0.06}
             color="#6f1628"
             emissive="#330814"
             emissiveIntensity={0.58}
+            map={humanoidMetal.map}
             metalness={0.64}
             roughness={0.24}
           />
         </mesh>
         <mesh position={[-1.02, 0.08, -0.02]} rotation={[0.24, 0.12, -0.18]} scale={[0.34, 1.28, 0.34]}>
           <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial color="#d6a253" emissive="#593611" emissiveIntensity={0.38} metalness={0.82} roughness={0.16} />
+          <meshStandardMaterial bumpMap={goldMetal.bump} bumpScale={0.05} color="#d6a253" emissive="#593611" emissiveIntensity={0.38} map={goldMetal.map} metalness={0.82} roughness={0.16} />
         </mesh>
         <mesh position={[1.02, 0.08, -0.02]} rotation={[0.24, -0.12, 0.18]} scale={[0.34, 1.28, 0.34]}>
           <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial color="#d6a253" emissive="#593611" emissiveIntensity={0.38} metalness={0.82} roughness={0.16} />
+          <meshStandardMaterial bumpMap={goldMetal.bump} bumpScale={0.05} color="#d6a253" emissive="#593611" emissiveIntensity={0.38} map={goldMetal.map} metalness={0.82} roughness={0.16} />
         </mesh>
         <mesh position={[0, 2.58, -0.04]} rotation={[0.04, 0, 0]} scale={[0.9, 1.18, 0.82]}>
           <icosahedronGeometry args={[0.92, 3]} />
           <meshStandardMaterial
+            bumpMap={humanoidMetal.bump}
+            bumpScale={0.06}
             color="#9a2238"
             emissive="#4a0f1d"
             emissiveIntensity={0.86}
+            map={humanoidMetal.map}
             metalness={0.58}
             roughness={0.16}
           />
@@ -90,11 +112,11 @@ export function HumanoidBust({ crystalRef }: { crystalRef: RefObject<Mesh | null
 
         <mesh position={[-0.34, 2.38, 0.48]} rotation={[0.18, -0.14, -0.18]} scale={[0.16, 0.46, 0.16]}>
           <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial color="#d0a355" emissive="#684714" emissiveIntensity={0.42} metalness={0.8} roughness={0.16} />
+          <meshStandardMaterial bumpMap={goldMetal.bump} bumpScale={0.04} color="#d0a355" emissive="#684714" emissiveIntensity={0.42} map={goldMetal.map} metalness={0.8} roughness={0.16} />
         </mesh>
         <mesh position={[0.34, 2.38, 0.48]} rotation={[0.18, 0.14, 0.18]} scale={[0.16, 0.46, 0.16]}>
           <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial color="#d0a355" emissive="#684714" emissiveIntensity={0.42} metalness={0.8} roughness={0.16} />
+          <meshStandardMaterial bumpMap={goldMetal.bump} bumpScale={0.04} color="#d0a355" emissive="#684714" emissiveIntensity={0.42} map={goldMetal.map} metalness={0.8} roughness={0.16} />
         </mesh>
 
         <mesh position={[0, 2.02, 0.68]} rotation={[0.36, 0, 0]} scale={[0.34, 0.18, 0.06]}>
@@ -104,11 +126,11 @@ export function HumanoidBust({ crystalRef }: { crystalRef: RefObject<Mesh | null
 
         <mesh position={[-0.42, 2.84, 0.24]} rotation={[0.16, -0.1, -0.36]} scale={[0.24, 0.5, 0.18]}>
           <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial color="#811b2d" emissive="#430c18" emissiveIntensity={0.5} metalness={0.74} roughness={0.14} />
+          <meshStandardMaterial bumpMap={humanoidMetal.bump} bumpScale={0.05} color="#811b2d" emissive="#430c18" emissiveIntensity={0.5} map={humanoidMetal.map} metalness={0.74} roughness={0.14} />
         </mesh>
         <mesh position={[0.42, 2.84, 0.24]} rotation={[0.16, 0.1, 0.36]} scale={[0.24, 0.5, 0.18]}>
           <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial color="#811b2d" emissive="#430c18" emissiveIntensity={0.5} metalness={0.74} roughness={0.14} />
+          <meshStandardMaterial bumpMap={humanoidMetal.bump} bumpScale={0.05} color="#811b2d" emissive="#430c18" emissiveIntensity={0.5} map={humanoidMetal.map} metalness={0.74} roughness={0.14} />
         </mesh>
 
         <mesh position={[0, 2.92, 0.48]} rotation={[0.2, 0, 0]} scale={[0.24, 0.68, 0.14]}>
@@ -148,7 +170,7 @@ export function HumanoidBust({ crystalRef }: { crystalRef: RefObject<Mesh | null
 
         <mesh position={[0, 3.34, -0.02]} rotation={[0.06, 0, 0]} scale={[0.58, 0.3, 0.5]}>
           <sphereGeometry args={[1, 20, 20]} />
-          <meshStandardMaterial color="#7d1a2d" emissive="#3f0b18" emissiveIntensity={0.38} metalness={0.6} roughness={0.2} />
+          <meshStandardMaterial bumpMap={humanoidMetal.bump} bumpScale={0.05} color="#7d1a2d" emissive="#3f0b18" emissiveIntensity={0.38} map={humanoidMetal.map} metalness={0.6} roughness={0.2} />
         </mesh>
       </group>
 
@@ -249,6 +271,14 @@ export function NodeModel({
   const opacity = isDimmed ? 0.22 : 1;
   const baseScale = isSelected ? 1.24 : isHovered ? 1.08 : 1;
   const profile = getNodeProfile(node);
+  const textureSet =
+    profile.family === "crystal"
+      ? getProceduralTextureSet("core-crystal")
+      : profile.family === "engineered"
+        ? getProceduralTextureSet("engineered-world")
+        : profile.family === "asteroid"
+          ? getProceduralTextureSet("rocky-asteroid")
+          : getProceduralTextureSet("organic-world");
 
   return (
     <Float floatIntensity={isMobile ? 0.22 : 0.55} rotationIntensity={0.18} speed={1.2}>
@@ -258,6 +288,7 @@ export function NodeModel({
           isSelected={isSelected}
           opacity={opacity}
           profile={profile}
+          textureSet={textureSet}
           zone={node.zone}
         />
         <NodeSatellites color={color} profile={profile} zone={node.zone} />
@@ -271,25 +302,32 @@ function PlanetShell({
   color,
   opacity,
   isSelected,
-  profile
+  profile,
+  textureSet
 }: {
   zone: Zone;
   color: string;
   opacity: number;
   isSelected: boolean;
   profile: NodeProfile;
+  textureSet: ReturnType<typeof getProceduralTextureSet>;
 }) {
+  const { bump, map } = textureSet;
+
   if (zone === "core") {
     return (
       <group>
         <mesh>
           <icosahedronGeometry args={[profile.primaryScale, profile.detail]} />
           <MeshTransmissionMaterial
+            bumpMap={bump}
+            bumpScale={0.06}
             chromaticAberration={0.04}
             color={color}
             distortion={0.12}
             emissive={color}
             emissiveIntensity={isSelected ? 1.9 : 1.15}
+            map={map}
             roughness={0.12}
             thickness={0.9}
             transparent
@@ -309,9 +347,12 @@ function PlanetShell({
         <mesh>
           <dodecahedronGeometry args={[profile.primaryScale, profile.detail]} />
           <meshStandardMaterial
+            bumpMap={bump}
+            bumpScale={0.08}
             color={profile.surfaceColor}
             emissive={color}
             emissiveIntensity={isSelected ? 1.5 : 0.95}
+            map={map}
             metalness={0.72}
             opacity={opacity}
             roughness={0.18}
@@ -324,7 +365,37 @@ function PlanetShell({
         </mesh>
         <mesh position={[0.46, -0.18, 0.14]} rotation={[0.32, 0.4, 0]} scale={[0.22, 0.18, 0.2]}>
           <dodecahedronGeometry args={[1, 1]} />
-          <meshStandardMaterial color={profile.moonColor} emissive={color} emissiveIntensity={0.35} metalness={0.62} roughness={0.24} opacity={0.9 * opacity} transparent />
+          <meshStandardMaterial bumpMap={bump} bumpScale={0.04} color={profile.moonColor} emissive={color} emissiveIntensity={0.35} map={map} metalness={0.62} roughness={0.24} opacity={0.9 * opacity} transparent />
+        </mesh>
+      </group>
+    );
+  }
+
+  if (profile.family === "asteroid") {
+    return (
+      <group>
+        <mesh rotation={[0.42, 0.3, 0.1]} scale={[1.18, 0.92, 0.78]}>
+          <icosahedronGeometry args={[profile.primaryScale, Math.max(profile.detail, 2)]} />
+          <meshStandardMaterial
+            bumpMap={bump}
+            bumpScale={0.16}
+            color={profile.surfaceColor}
+            emissive={color}
+            emissiveIntensity={isSelected ? 0.7 : 0.28}
+            map={map}
+            metalness={0.1}
+            opacity={opacity}
+            roughness={0.9}
+            transparent
+          />
+        </mesh>
+        <mesh position={[0.72, 0.18, -0.08]} rotation={[0.3, 0.5, 0.2]} scale={[0.42, 0.3, 0.34]}>
+          <dodecahedronGeometry args={[1, 1]} />
+          <meshStandardMaterial bumpMap={bump} bumpScale={0.12} color={profile.moonColor} map={map} metalness={0.04} opacity={0.94 * opacity} roughness={0.92} transparent />
+        </mesh>
+        <mesh position={[-0.62, -0.24, 0.14]} rotation={[0.18, 0.2, 0.56]} scale={[0.34, 0.28, 0.26]}>
+          <icosahedronGeometry args={[1, 1]} />
+          <meshStandardMaterial bumpMap={bump} bumpScale={0.12} color={profile.surfaceColor} map={map} metalness={0.03} opacity={0.88 * opacity} roughness={0.94} transparent />
         </mesh>
       </group>
     );
@@ -335,10 +406,13 @@ function PlanetShell({
       <mesh>
         <icosahedronGeometry args={[profile.primaryScale, profile.detail]} />
         <MeshDistortMaterial
+          bumpMap={bump}
+          bumpScale={0.06}
           color={profile.surfaceColor}
           distort={profile.distort}
           emissive={color}
           emissiveIntensity={isSelected ? 1.9 : 1.25}
+          map={map}
           metalness={0.16}
           opacity={opacity}
           roughness={0.28}
@@ -352,7 +426,56 @@ function PlanetShell({
       </mesh>
       <mesh position={[-0.52, 0.24, 0.08]} rotation={[0.2, 0.4, 0.1]} scale={[0.18, 0.16, 0.14]}>
         <icosahedronGeometry args={[1, 1]} />
-        <meshStandardMaterial color={profile.moonColor} emissive={profile.ringColor} emissiveIntensity={0.2} roughness={0.46} metalness={0.08} opacity={0.92 * opacity} transparent />
+        <meshStandardMaterial bumpMap={bump} bumpScale={0.05} color={profile.moonColor} emissive={profile.ringColor} emissiveIntensity={0.2} map={map} roughness={0.46} metalness={0.08} opacity={0.92 * opacity} transparent />
+      </mesh>
+    </group>
+  );
+}
+
+export function AsteroidRock({
+  color,
+  opacity = 1,
+  position,
+  rotation,
+  scale
+}: {
+  color: string;
+  opacity?: number;
+  position: [number, number, number];
+  rotation: [number, number, number];
+  scale: [number, number, number];
+}) {
+  const rockyTexture = getProceduralTextureSet("rocky-asteroid");
+
+  return (
+    <group position={position} rotation={rotation} scale={scale}>
+      <mesh rotation={[0.16, 0.24, 0.08]} scale={[1.18, 0.92, 0.82]}>
+        <icosahedronGeometry args={[1, 2]} />
+        <meshStandardMaterial
+          bumpMap={rockyTexture.bump}
+          bumpScale={0.18}
+          color={color}
+          emissive="#0f141b"
+          emissiveIntensity={0.1}
+          map={rockyTexture.map}
+          metalness={0.05}
+          opacity={opacity}
+          roughness={0.95}
+          transparent
+        />
+      </mesh>
+      <mesh position={[0.42, -0.18, 0.2]} rotation={[0.34, 0.42, 0.1]} scale={[0.34, 0.28, 0.26]}>
+        <dodecahedronGeometry args={[1, 1]} />
+        <meshStandardMaterial
+          bumpMap={rockyTexture.bump}
+          bumpScale={0.14}
+          color="#a9a29a"
+          map={rockyTexture.map}
+          metalness={0.03}
+          opacity={opacity}
+          roughness={0.96}
+          transparent
+        />
       </mesh>
     </group>
   );
@@ -412,6 +535,7 @@ function NodeSatellites({
 }
 
 type NodeProfile = {
+  family: "crystal" | "engineered" | "organic" | "asteroid";
   primaryScale: number;
   detail: number;
   distort: number;
@@ -426,6 +550,7 @@ type NodeProfile = {
 function getNodeProfile(node: SceneNode): NodeProfile {
   if (node.zone === "core") {
     return {
+      family: "crystal",
       primaryScale:
         node.id === "iam-vizion" ? 0.58 : node.id === "collaborate" ? 0.5 : 0.42,
       detail: 2,
@@ -441,6 +566,8 @@ function getNodeProfile(node: SceneNode): NodeProfile {
 
   if (node.zone === "left") {
     return {
+      family:
+        node.id === "projects" || node.id === "experience-archive" ? "asteroid" : "engineered",
       primaryScale:
         node.id === "projects"
           ? 0.62
@@ -468,6 +595,8 @@ function getNodeProfile(node: SceneNode): NodeProfile {
   }
 
   return {
+    family:
+      node.id === "gallery" || node.id === "dream-layer" ? "asteroid" : "organic",
     primaryScale:
       node.id === "music"
         ? 0.58
