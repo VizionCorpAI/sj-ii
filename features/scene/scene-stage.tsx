@@ -183,6 +183,7 @@ export function SceneStage() {
             ))}
 
             <ConnectionWeb selectedNodeId={selectedNodeId} />
+            <AsteroidFields />
             <MemoryShards isMobile={isMobile} selectedNodeId={selectedNodeId} />
             <FocusField focusZone={focusZone} />
           </group>
@@ -380,6 +381,90 @@ function ConnectionWeb({ selectedNodeId }: { selectedNodeId: string | null }) {
             );
           })
       )}
+    </>
+  );
+}
+
+function AsteroidFields() {
+  const fields = [
+    {
+      id: "projects",
+      color: "#8ea0b8",
+      offsets: [
+        [1.1, 0.42, -0.22],
+        [1.56, -0.18, 0.08],
+        [-1.02, 0.24, -0.14],
+        [-1.42, -0.44, 0.12],
+        [0.26, -0.82, 0.16]
+      ]
+    },
+    {
+      id: "experience-archive",
+      color: "#b0bac6",
+      offsets: [
+        [0.92, 0.32, -0.14],
+        [1.32, -0.08, 0.06],
+        [-0.84, -0.26, 0.1],
+        [-1.22, 0.48, -0.08]
+      ]
+    },
+    {
+      id: "gallery",
+      color: "#c69473",
+      offsets: [
+        [1.02, 0.46, -0.18],
+        [1.46, -0.22, 0.08],
+        [-1.08, 0.18, -0.1],
+        [-1.34, -0.38, 0.12],
+        [0.22, -0.94, 0.22]
+      ]
+    },
+    {
+      id: "dream-layer",
+      color: "#bba4ff",
+      offsets: [
+        [0.88, 0.34, -0.16],
+        [1.18, -0.14, 0.08],
+        [-0.96, -0.26, 0.16],
+        [-1.24, 0.44, -0.04]
+      ]
+    }
+  ] as const;
+
+  return (
+    <>
+      {fields.map((field) => {
+        const anchor = sceneNodes.find((node) => node.id === field.id);
+        if (!anchor) {
+          return null;
+        }
+
+        return (
+          <group key={field.id} position={scalePosition(anchor.position)}>
+            {field.offsets.map((offset, index) => (
+              <mesh
+                key={`${field.id}-asteroid-${index}`}
+                position={offset as [number, number, number]}
+                rotation={[0.24 * (index + 1), 0.18 * index, 0.12 * (index + 2)]}
+                scale={[
+                  0.16 + index * 0.02,
+                  0.12 + (index % 2) * 0.04,
+                  0.12 + ((index + 1) % 3) * 0.03
+                ]}
+              >
+                <icosahedronGeometry args={[1, 1]} />
+                <meshStandardMaterial
+                  color={field.color}
+                  emissive="#11161f"
+                  emissiveIntensity={0.12}
+                  metalness={0.08}
+                  roughness={0.86}
+                />
+              </mesh>
+            ))}
+          </group>
+        );
+      })}
     </>
   );
 }

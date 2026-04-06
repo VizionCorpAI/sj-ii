@@ -393,7 +393,8 @@ type NodeProfile = {
 function getNodeProfile(node: SceneNode): NodeProfile {
   if (node.zone === "core") {
     return {
-      primaryScale: node.id === "iam-vizion" ? 0.46 : 0.4,
+      primaryScale:
+        node.id === "iam-vizion" ? 0.58 : node.id === "collaborate" ? 0.5 : 0.42,
       detail: 2,
       distort: 0.12,
       ringRadius: node.id === "collaborate" ? 0.78 : 0.62,
@@ -408,22 +409,41 @@ function getNodeProfile(node: SceneNode): NodeProfile {
   if (node.zone === "left") {
     return {
       primaryScale:
-        node.id === "projects" || node.id === "experience-archive" ? 0.46 : 0.38,
-      detail: node.id === "security" ? 2 : 1,
+        node.id === "projects"
+          ? 0.62
+          : node.id === "experience-archive"
+            ? 0.56
+            : node.id === "architecture"
+              ? 0.48
+              : 0.4,
+      detail: node.id === "security" || node.id === "projects" ? 2 : 1,
       distort: 0.1,
       ringRadius: node.id === "architecture" ? 0.68 : 0.58,
       ringTilt: node.id === "cloud-systems" ? 0.5 : 0.16,
       secondaryTilt: 0.5,
       surfaceColor:
-        node.id === "security" ? "#1e2b42" : node.id === "projects" ? "#2d3d58" : "#0d1a2e",
+        node.id === "security"
+          ? "#1e2b42"
+          : node.id === "projects"
+            ? "#445161"
+            : node.id === "experience-archive"
+              ? "#5a6675"
+              : "#0d1a2e",
       ringColor: "#43c6ff",
       moonColor: "#8fc7e8"
     };
   }
 
   return {
-    primaryScale: node.id === "gallery" ? 0.48 : 0.38,
-    detail: node.id === "dream-layer" ? 2 : 1,
+    primaryScale:
+      node.id === "music"
+        ? 0.58
+        : node.id === "gallery"
+          ? 0.62
+          : node.id === "dream-layer"
+            ? 0.5
+            : 0.4,
+    detail: node.id === "dream-layer" || node.id === "gallery" ? 2 : 1,
     distort: node.id === "dream-layer" ? 0.48 : 0.34,
     ringRadius: node.id === "music" ? 0.72 : 0.58,
     ringTilt: 0.3,
