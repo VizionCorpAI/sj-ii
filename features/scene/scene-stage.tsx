@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { Environment, Html, Lightformer, Line, Sparkles, Text } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { gsap } from "gsap";
-import { AdditiveBlending, Group, Mesh, Vector3 } from "three";
+import { AdditiveBlending, Group, Object3D, Vector3 } from "three";
 import { sceneNodes } from "@/content/portfolio-data";
 import { useSceneStore } from "@/lib/scene-store";
 import { getColorByKey } from "@/lib/scene-utils";
@@ -12,9 +12,9 @@ import type { SceneNode, Zone } from "@/lib/types";
 import {
   AsteroidRock,
   CrystalPortalHalo,
-  HumanoidBust,
   NodeModel,
   PortalTunnel,
+  SentinelModel,
   SelectedMemoryShard
 } from "./scene-models";
 
@@ -37,7 +37,7 @@ export function SceneStage() {
   const focusZone = useSceneStore((state) => state.focusZone);
   const groupRef = useRef<Group>(null);
   const humanoidRef = useRef<Group>(null);
-  const portalRef = useRef<Mesh>(null);
+  const portalRef = useRef<Object3D>(null);
   const hasStarted = useRef(false);
   const { camera } = useThree();
 
@@ -156,7 +156,7 @@ export function SceneStage() {
       <group ref={groupRef}>
         {introPhase !== "universe" ? (
           <group ref={humanoidRef}>
-            <HumanoidBust crystalRef={portalRef} />
+            <SentinelModel crystalRef={portalRef} />
             <CrystalPortalHalo />
             <PortalTunnel active={introPhase === "portal"} />
             <PortalTransitionOverlay active={introPhase === "portal"} />

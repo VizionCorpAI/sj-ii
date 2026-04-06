@@ -10,7 +10,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "generate:sentinel": "node scripts/generate-sentinel-glb.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.0.0",

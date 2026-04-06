@@ -1,14 +1,46 @@
 "use client";
 
+import { useEffect, useMemo } from "react";
 import type { RefObject } from "react";
-import { Float, MeshDistortMaterial, MeshTransmissionMaterial, Sparkles } from "@react-three/drei";
-import type { Mesh } from "three";
+import { Float, MeshDistortMaterial, MeshTransmissionMaterial, Sparkles, useGLTF } from "@react-three/drei";
+import type { Group, Mesh, Object3D } from "three";
 import { AdditiveBlending } from "three";
 import { getColorByKey } from "@/lib/scene-utils";
 import type { ColorKey, SceneNode, Zone } from "@/lib/types";
 import { getProceduralTextureSet } from "./procedural-textures";
 
-export function HumanoidBust({ crystalRef }: { crystalRef: RefObject<Mesh | null> }) {
+const SENTINEL_MODEL_PATH = "/models/sentinel.glb";
+
+export function SentinelModel({ crystalRef }: { crystalRef: RefObject<Object3D | null> }) {
+  const gltf = useGLTF(SENTINEL_MODEL_PATH);
+  const scene = useMemo(() => gltf.scene.clone(true), [gltf.scene]);
+
+  useEffect(() => {
+    let crystal: Object3D | null = null;
+
+    scene.traverse((child) => {
+      child.castShadow = true;
+      child.receiveShadow = true;
+      if (child.name === "MindCrystal") {
+        crystal = child;
+      }
+    });
+
+    crystalRef.current = crystal;
+
+    return () => {
+      if (crystalRef.current === crystal) {
+        crystalRef.current = null;
+      }
+    };
+  }, [crystalRef, scene]);
+
+  return <primitive object={scene} />;
+}
+
+useGLTF.preload(SENTINEL_MODEL_PATH);
+
+export function HumanoidBust({ crystalRef }: { crystalRef: RefObject<Object3D | null> }) {
   const humanoidMetal = getProceduralTextureSet("humanoid-metal");
   const goldMetal = getProceduralTextureSet("gold-metal");
 
