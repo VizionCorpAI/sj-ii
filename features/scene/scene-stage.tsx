@@ -13,6 +13,7 @@ import {
   CrystalPortalHalo,
   HumanoidBust,
   NodeModel,
+  PortalTunnel,
   SelectedMemoryShard
 } from "./scene-models";
 
@@ -135,6 +136,8 @@ export function SceneStage() {
           <group ref={humanoidRef}>
             <HumanoidBust crystalRef={portalRef} />
             <CrystalPortalHalo />
+            <PortalTunnel active={introPhase === "portal"} />
+            <PortalTransitionOverlay active={introPhase === "portal"} />
           </group>
         ) : null}
 
@@ -183,6 +186,25 @@ function ZoneAtmospheres() {
       <HemisphereAura color="#ff8f52" position={[5.8, 0.15, -1.6]} scale={[7.4, 4.5, 1]} />
       <HemisphereAura color="#9be8ff" position={[0, 0.05, -1.2]} scale={[4.6, 3.2, 1]} />
       <CorePulse />
+    </group>
+  );
+}
+
+function PortalTransitionOverlay({ active }: { active: boolean }) {
+  if (!active) {
+    return null;
+  }
+
+  return (
+    <group position={[0, 0.6, -2.5]}>
+      <mesh scale={[10, 6, 1]}>
+        <planeGeometry args={[1, 1]} />
+        <meshBasicMaterial color="#12070c" opacity={0.28} transparent />
+      </mesh>
+      <mesh scale={[4.2, 2.8, 1]}>
+        <planeGeometry args={[1, 1]} />
+        <meshBasicMaterial color="#ffb760" opacity={0.08} transparent />
+      </mesh>
     </group>
   );
 }

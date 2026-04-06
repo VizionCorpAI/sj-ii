@@ -121,6 +121,37 @@ export function CrystalPortalHalo() {
   );
 }
 
+export function PortalTunnel({ active }: { active: boolean }) {
+  if (!active) {
+    return null;
+  }
+
+  return (
+    <group position={[0, 2.95, -0.35]}>
+      <mesh rotation={[Math.PI / 2, 0, 0]} scale={[1, 1, 3.6]}>
+        <cylinderGeometry args={[0.92, 0.34, 2.8, 32, 1, true]} />
+        <meshBasicMaterial color="#ffcf68" opacity={0.16} side={2} transparent />
+      </mesh>
+      <mesh rotation={[Math.PI / 2, 0.18, 0]} scale={[1, 1, 2.6]}>
+        <torusGeometry args={[0.92, 0.045, 18, 80]} />
+        <meshBasicMaterial color="#fff2b0" opacity={0.62} transparent />
+      </mesh>
+      <mesh rotation={[Math.PI / 2, 0.58, 0]} scale={[1.25, 1.25, 3.2]}>
+        <torusGeometry args={[0.72, 0.028, 18, 80]} />
+        <meshBasicMaterial color="#ff8a52" opacity={0.32} transparent />
+      </mesh>
+      <Sparkles
+        count={70}
+        color="#ffd36a"
+        position={[0, 0, -0.7]}
+        scale={[1.8, 1.8, 3.1]}
+        size={4}
+        speed={0.8}
+      />
+    </group>
+  );
+}
+
 export function NodeModel({
   node,
   isDimmed,
