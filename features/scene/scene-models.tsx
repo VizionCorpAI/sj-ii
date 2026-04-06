@@ -101,9 +101,48 @@ export function HumanoidBust({ crystalRef }: { crystalRef: RefObject<Mesh | null
             roughness={0.16}
           />
         </mesh>
+        <mesh position={[0, 2.58, 0.02]} rotation={[0.08, 0, 0]} scale={[1.08, 1.24, 0.72]}>
+          <octahedronGeometry args={[0.88, 2]} />
+          <meshStandardMaterial
+            bumpMap={humanoidMetal.bump}
+            bumpScale={0.04}
+            color="#8e2135"
+            emissive="#340913"
+            emissiveIntensity={0.28}
+            map={humanoidMetal.map}
+            metalness={0.76}
+            roughness={0.18}
+          />
+        </mesh>
+        <mesh position={[0, 2.18, 0.18]} rotation={[0.3, 0, 0]} scale={[0.66, 0.4, 0.3]}>
+          <cylinderGeometry args={[0.88, 1.12, 0.42, 8]} />
+          <meshStandardMaterial
+            bumpMap={goldMetal.bump}
+            bumpScale={0.04}
+            color="#b58337"
+            emissive="#52320d"
+            emissiveIntensity={0.28}
+            map={goldMetal.map}
+            metalness={0.88}
+            roughness={0.14}
+          />
+        </mesh>
         <mesh position={[0, 2.46, 0.54]} rotation={[0.22, 0, 0]} scale={[0.34, 0.9, 0.24]}>
           <boxGeometry args={[1, 1, 1]} />
           <meshStandardMaterial color="#8d1f34" emissive="#4a0f1d" emissiveIntensity={0.58} metalness={0.62} roughness={0.18} />
+        </mesh>
+        <mesh position={[0, 2.72, 0.56]} rotation={[0.18, 0, 0]} scale={[0.82, 0.18, 0.16]}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial
+            bumpMap={goldMetal.bump}
+            bumpScale={0.04}
+            color="#cb9a48"
+            emissive="#67400f"
+            emissiveIntensity={0.3}
+            map={goldMetal.map}
+            metalness={0.9}
+            roughness={0.12}
+          />
         </mesh>
         <mesh position={[0, 2.26, 0.7]} rotation={[0.4, 0, 0]} scale={[0.52, 0.16, 0.08]}>
           <boxGeometry args={[1.16, 1, 1]} />
@@ -167,10 +206,105 @@ export function HumanoidBust({ crystalRef }: { crystalRef: RefObject<Mesh | null
             thickness={0.92}
           />
         </mesh>
+        <mesh position={[0, 3.08, 0.94]} rotation={[0.08, 0.24, 0.18]} scale={[1.44, 1.44, 1.44]}>
+          <octahedronGeometry args={[0.26, 0]} />
+          <meshBasicMaterial color="#ffe89b" opacity={0.12} transparent />
+        </mesh>
 
         <mesh position={[0, 3.34, -0.02]} rotation={[0.06, 0, 0]} scale={[0.58, 0.3, 0.5]}>
           <sphereGeometry args={[1, 20, 20]} />
           <meshStandardMaterial bumpMap={humanoidMetal.bump} bumpScale={0.05} color="#7d1a2d" emissive="#3f0b18" emissiveIntensity={0.38} map={humanoidMetal.map} metalness={0.6} roughness={0.2} />
+        </mesh>
+        <mesh position={[-0.62, 2.74, 0.42]} rotation={[0.2, -0.18, -0.32]} scale={[0.26, 0.7, 0.16]}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial
+            bumpMap={humanoidMetal.bump}
+            bumpScale={0.05}
+            color="#7b1a2d"
+            emissive="#3a0a15"
+            emissiveIntensity={0.34}
+            map={humanoidMetal.map}
+            metalness={0.8}
+            roughness={0.14}
+          />
+        </mesh>
+        <mesh position={[0.62, 2.74, 0.42]} rotation={[0.2, 0.18, 0.32]} scale={[0.26, 0.7, 0.16]}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial
+            bumpMap={humanoidMetal.bump}
+            bumpScale={0.05}
+            color="#7b1a2d"
+            emissive="#3a0a15"
+            emissiveIntensity={0.34}
+            map={humanoidMetal.map}
+            metalness={0.8}
+            roughness={0.14}
+          />
+        </mesh>
+        <mesh position={[-0.44, 2.42, 0.82]} rotation={[0.3, -0.16, -0.18]} scale={[0.18, 0.44, 0.12]}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial
+            bumpMap={goldMetal.bump}
+            bumpScale={0.04}
+            color="#c59645"
+            emissive="#5f3b10"
+            emissiveIntensity={0.24}
+            map={goldMetal.map}
+            metalness={0.88}
+            roughness={0.12}
+          />
+        </mesh>
+        <mesh position={[0.44, 2.42, 0.82]} rotation={[0.3, 0.16, 0.18]} scale={[0.18, 0.44, 0.12]}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial
+            bumpMap={goldMetal.bump}
+            bumpScale={0.04}
+            color="#c59645"
+            emissive="#5f3b10"
+            emissiveIntensity={0.24}
+            map={goldMetal.map}
+            metalness={0.88}
+            roughness={0.12}
+          />
+        </mesh>
+        <mesh position={[0, 1.58, -0.18]} rotation={[0.04, 0, 0]} scale={[1.36, 0.32, 0.66]}>
+          <cylinderGeometry args={[1.22, 1.54, 0.56, 8]} />
+          <meshStandardMaterial
+            bumpMap={goldMetal.bump}
+            bumpScale={0.05}
+            color="#af7c2f"
+            emissive="#51310d"
+            emissiveIntensity={0.22}
+            map={goldMetal.map}
+            metalness={0.84}
+            roughness={0.2}
+          />
+        </mesh>
+        <mesh position={[-1.36, 1.34, -0.2]} rotation={[0.14, 0.1, -0.88]} scale={[0.92, 0.64, 0.78]}>
+          <octahedronGeometry args={[0.74, 1]} />
+          <meshStandardMaterial
+            bumpMap={humanoidMetal.bump}
+            bumpScale={0.06}
+            color="#7a1a2d"
+            emissive="#300814"
+            emissiveIntensity={0.32}
+            map={humanoidMetal.map}
+            metalness={0.74}
+            roughness={0.16}
+          />
+        </mesh>
+        <mesh position={[1.36, 1.34, -0.2]} rotation={[0.14, -0.1, 0.88]} scale={[0.92, 0.64, 0.78]}>
+          <octahedronGeometry args={[0.74, 1]} />
+          <meshStandardMaterial
+            bumpMap={humanoidMetal.bump}
+            bumpScale={0.06}
+            color="#7a1a2d"
+            emissive="#300814"
+            emissiveIntensity={0.32}
+            map={humanoidMetal.map}
+            metalness={0.74}
+            roughness={0.16}
+          />
         </mesh>
       </group>
 
@@ -333,6 +467,10 @@ function PlanetShell({
             transparent
           />
         </mesh>
+        <mesh scale={[1.14, 1.14, 1.14]}>
+          <icosahedronGeometry args={[profile.primaryScale, profile.detail]} />
+          <meshBasicMaterial color="#dbf8ff" opacity={0.08 * opacity} transparent />
+        </mesh>
         <mesh rotation={[Math.PI / 2, 0, profile.ringTilt]}>
           <torusGeometry args={[profile.ringRadius, 0.032, 18, 72]} />
           <meshBasicMaterial color="#dffcff" opacity={0.58 * opacity} transparent />
@@ -359,9 +497,39 @@ function PlanetShell({
             transparent
           />
         </mesh>
+        <mesh scale={[1.05, 1.05, 1.05]}>
+          <sphereGeometry args={[profile.primaryScale * 0.96, 32, 32]} />
+          <meshPhysicalMaterial
+            clearcoat={1}
+            clearcoatRoughness={0.24}
+            color="#7bd9ff"
+            opacity={0.08 * opacity}
+            roughness={0.36}
+            transparent
+          />
+        </mesh>
         <mesh rotation={[0.5, Math.PI / 2.5, profile.ringTilt]}>
           <torusGeometry args={[profile.ringRadius, 0.022, 12, 72]} />
           <meshBasicMaterial color={color} opacity={0.34 * opacity} transparent />
+        </mesh>
+        <mesh rotation={[0.16, 0.72, profile.ringTilt + 0.2]}>
+          <torusGeometry args={[profile.ringRadius * 0.78, 0.018, 10, 64]} />
+          <meshBasicMaterial color="#d7f7ff" opacity={0.22 * opacity} transparent />
+        </mesh>
+        <mesh rotation={[0, 0.22, 0]} scale={[1.16, 0.08, 1.16]}>
+          <torusGeometry args={[profile.primaryScale * 0.72, 0.075, 10, 64]} />
+          <meshStandardMaterial
+            bumpMap={bump}
+            bumpScale={0.05}
+            color="#162946"
+            emissive={color}
+            emissiveIntensity={0.18}
+            map={map}
+            metalness={0.86}
+            opacity={0.92 * opacity}
+            roughness={0.2}
+            transparent
+          />
         </mesh>
         <mesh position={[0.46, -0.18, 0.14]} rotation={[0.32, 0.4, 0]} scale={[0.22, 0.18, 0.2]}>
           <dodecahedronGeometry args={[1, 1]} />
@@ -420,9 +588,24 @@ function PlanetShell({
           transparent
         />
       </mesh>
+      <mesh scale={[1.08, 1.08, 1.08]}>
+        <sphereGeometry args={[profile.primaryScale * 0.94, 36, 36]} />
+        <meshPhysicalMaterial
+          clearcoat={0.8}
+          clearcoatRoughness={0.2}
+          color={profile.ringColor}
+          opacity={0.08 * opacity}
+          roughness={0.38}
+          transparent
+        />
+      </mesh>
       <mesh rotation={[profile.secondaryTilt, 0.38, 0.3]}>
         <torusGeometry args={[profile.ringRadius, 0.04, 14, 72]} />
         <meshBasicMaterial color={profile.ringColor} opacity={0.28 * opacity} transparent />
+      </mesh>
+      <mesh rotation={[profile.secondaryTilt + 0.4, -0.22, 0.2]} scale={[1.1, 1.1, 1.1]}>
+        <torusGeometry args={[profile.ringRadius * 0.76, 0.02, 10, 64]} />
+        <meshBasicMaterial color="#fff0db" opacity={0.14 * opacity} transparent />
       </mesh>
       <mesh position={[-0.52, 0.24, 0.08]} rotation={[0.2, 0.4, 0.1]} scale={[0.18, 0.16, 0.14]}>
         <icosahedronGeometry args={[1, 1]} />
