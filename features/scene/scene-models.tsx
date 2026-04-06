@@ -10,56 +10,85 @@ import type { ColorKey, SceneNode, Zone } from "@/lib/types";
 export function HumanoidBust({ crystalRef }: { crystalRef: RefObject<Mesh | null> }) {
   return (
     <group>
-      <group position={[0, 0.18, -0.18]}>
-        <mesh position={[0, -0.18, 0]} scale={[2.45, 1.2, 1.25]}>
+      <group position={[0, 0.12, -0.16]}>
+        <mesh position={[0, -0.2, -0.05]} scale={[2.65, 1.28, 1.36]}>
           <sphereGeometry args={[1, 42, 42]} />
-          <meshStandardMaterial color="#09111d" emissive="#09192f" emissiveIntensity={0.65} />
+          <meshStandardMaterial color="#4f1120" emissive="#2d0815" emissiveIntensity={0.88} metalness={0.42} roughness={0.34} />
         </mesh>
-        <mesh position={[0, 1.1, -0.1]} scale={[0.56, 0.78, 0.46]}>
-          <capsuleGeometry args={[0.62, 1.25, 12, 28]} />
-          <meshStandardMaterial color="#10182a" emissive="#10213a" emissiveIntensity={0.8} />
+
+        <mesh position={[0, 0.95, 0.08]} rotation={[0.2, 0, 0]} scale={[1.12, 0.78, 0.55]}>
+          <capsuleGeometry args={[0.74, 1.5, 14, 28]} />
+          <meshStandardMaterial color="#9b2639" emissive="#511221" emissiveIntensity={0.82} metalness={0.38} roughness={0.28} />
         </mesh>
-        <mesh position={[0, 2.58, 0]} scale={[1.08, 1.22, 1.02]}>
-          <icosahedronGeometry args={[0.92, 3]} />
-          <meshStandardMaterial color="#131c31" emissive="#0f1f38" emissiveIntensity={0.95} />
-        </mesh>
-        <mesh position={[0, 2.14, 0.65]} rotation={[0.42, 0, 0]} scale={[0.56, 0.32, 0.2]}>
+        <mesh position={[0, 0.58, 0.44]} rotation={[0.55, 0, 0]} scale={[0.82, 0.45, 0.22]}>
           <sphereGeometry args={[1, 24, 24]} />
-          <meshStandardMaterial color="#182239" emissive="#10213a" emissiveIntensity={0.52} />
+          <meshStandardMaterial color="#d1a14b" emissive="#6d4818" emissiveIntensity={0.65} metalness={0.62} roughness={0.24} />
         </mesh>
-        <mesh position={[0, 2.9, 0.82]} rotation={[0.08, 0.24, 0.18]} ref={crystalRef}>
-          <octahedronGeometry args={[0.42, 0]} />
+
+        <mesh position={[-1.38, 0.96, -0.04]} rotation={[0.14, 0.08, -0.76]} scale={[0.6, 1.14, 0.62]}>
+          <capsuleGeometry args={[0.52, 1.36, 10, 20]} />
+          <meshStandardMaterial color="#6d1628" emissive="#370912" emissiveIntensity={0.7} metalness={0.45} roughness={0.34} />
+        </mesh>
+        <mesh position={[1.38, 0.96, -0.04]} rotation={[0.14, -0.08, 0.76]} scale={[0.6, 1.14, 0.62]}>
+          <capsuleGeometry args={[0.52, 1.36, 10, 20]} />
+          <meshStandardMaterial color="#6d1628" emissive="#370912" emissiveIntensity={0.7} metalness={0.45} roughness={0.34} />
+        </mesh>
+
+        <mesh position={[0, 2.62, 0]} scale={[0.96, 1.28, 0.98]}>
+          <sphereGeometry args={[0.86, 36, 36]} />
+          <meshStandardMaterial color="#8e2034" emissive="#4b0d1b" emissiveIntensity={0.94} metalness={0.36} roughness={0.26} />
+        </mesh>
+        <mesh position={[0, 2.34, 0.54]} rotation={[0.4, 0, 0]} scale={[0.52, 0.34, 0.22]}>
+          <sphereGeometry args={[1, 24, 24]} />
+          <meshStandardMaterial color="#ccac60" emissive="#6f4d20" emissiveIntensity={0.75} metalness={0.7} roughness={0.18} />
+        </mesh>
+
+        <mesh position={[0, 2.82, 0.38]} rotation={[0.28, 0, 0]} scale={[0.54, 0.76, 0.18]}>
+          <sphereGeometry args={[1, 28, 28]} />
+          <meshStandardMaterial color="#d9b56a" emissive="#704d16" emissiveIntensity={0.68} metalness={0.62} roughness={0.22} />
+        </mesh>
+        <mesh position={[0, 2.52, 0.78]} rotation={[0.32, 0, 0]} scale={[0.42, 0.18, 0.08]}>
+          <boxGeometry args={[1.2, 1, 1]} />
+          <meshBasicMaterial color="#f6dfb1" opacity={0.68} transparent />
+        </mesh>
+        <mesh position={[0, 2.94, 0.46]} rotation={[0.18, 0, 0]} scale={[0.22, 0.58, 0.12]}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial color="#d8b064" emissive="#6b4919" emissiveIntensity={0.64} metalness={0.65} roughness={0.18} />
+        </mesh>
+        <mesh position={[0, 3.05, 0.9]} rotation={[0.08, 0.24, 0.18]} ref={crystalRef}>
+          <octahedronGeometry args={[0.3, 0]} />
           <MeshTransmissionMaterial
-            anisotropy={0.45}
-            chromaticAberration={0.06}
+            anisotropy={0.6}
+            chromaticAberration={0.045}
             clearcoat={1}
-            distortion={0.25}
-            emissive="#83eeff"
-            emissiveIntensity={1.8}
-            ior={1.15}
-            roughness={0.08}
-            thickness={0.8}
+            color="#ffd66f"
+            distortion={0.12}
+            emissive="#ffd15a"
+            emissiveIntensity={2.35}
+            ior={1.18}
+            roughness={0.04}
+            thickness={0.92}
           />
         </mesh>
       </group>
 
-      <mesh position={[0, 1.55, 0.1]} rotation={[0.12, 0, 0]} scale={[0.12, 3.8, 0.12]}>
+      <mesh position={[0, 1.48, 0.14]} rotation={[0.12, 0, 0]} scale={[0.1, 4.1, 0.1]}>
         <capsuleGeometry args={[1, 1, 10, 16]} />
-        <meshBasicMaterial color="#66dfff" opacity={0.16} transparent />
+        <meshBasicMaterial color="#ffd36a" opacity={0.16} transparent />
       </mesh>
       <mesh position={[-0.55, 1.42, 0.18]} rotation={[0.2, 0.04, -0.5]} scale={[0.08, 2.3, 0.08]}>
         <capsuleGeometry args={[1, 1, 8, 14]} />
-        <meshBasicMaterial color="#5ebeff" opacity={0.14} transparent />
+        <meshBasicMaterial color="#ff7c5a" opacity={0.14} transparent />
       </mesh>
       <mesh position={[0.58, 1.36, 0.15]} rotation={[0.16, -0.04, 0.52]} scale={[0.08, 2.45, 0.08]}>
         <capsuleGeometry args={[1, 1, 8, 14]} />
-        <meshBasicMaterial color="#6fe4ff" opacity={0.14} transparent />
+        <meshBasicMaterial color="#ffb86a" opacity={0.14} transparent />
       </mesh>
 
       <Sparkles
         count={80}
-        color="#8deaff"
-        position={[0, 2.85, 0.82]}
+        color="#ffd36a"
+        position={[0, 3.02, 0.9]}
         scale={[1.6, 0.95, 1]}
         size={3.6}
         speed={0.55}
@@ -70,21 +99,21 @@ export function HumanoidBust({ crystalRef }: { crystalRef: RefObject<Mesh | null
 
 export function CrystalPortalHalo() {
   return (
-    <group position={[0, 2.92, 0.8]}>
+    <group position={[0, 3.02, 0.88]}>
       <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[0.68, 0.024, 18, 96]} />
-        <meshBasicMaterial color="#98efff" opacity={0.85} transparent />
+        <torusGeometry args={[0.58, 0.02, 18, 96]} />
+        <meshBasicMaterial color="#ffe58e" opacity={0.88} transparent />
       </mesh>
       <mesh rotation={[Math.PI / 2, Math.PI / 3, 0]}>
-        <torusGeometry args={[0.98, 0.014, 18, 96]} />
-        <meshBasicMaterial color="#ffd36a" opacity={0.42} transparent />
+        <torusGeometry args={[0.84, 0.012, 18, 96]} />
+        <meshBasicMaterial color="#ff9559" opacity={0.34} transparent />
       </mesh>
       <mesh rotation={[0.28, 0.22, 0.1]} scale={[1.4, 0.55, 1]}>
         <sphereGeometry args={[0.92, 36, 36]} />
         <meshBasicMaterial
           blending={AdditiveBlending}
-          color="#5ccfff"
-          opacity={0.1}
+          color="#ffc85f"
+          opacity={0.13}
           transparent
         />
       </mesh>
