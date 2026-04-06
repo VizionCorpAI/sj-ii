@@ -69,20 +69,48 @@ export function HumanoidBust({ crystalRef }: { crystalRef: RefObject<Mesh | null
           <boxGeometry args={[1, 1, 1]} />
           <meshStandardMaterial color="#d6a253" emissive="#593611" emissiveIntensity={0.38} metalness={0.82} roughness={0.16} />
         </mesh>
-        <mesh position={[0, 2.58, 0.02]} scale={[0.82, 1.22, 0.9]}>
-          <sphereGeometry args={[0.88, 42, 42]} />
+        <mesh position={[0, 2.58, -0.04]} rotation={[0.04, 0, 0]} scale={[0.9, 1.18, 0.82]}>
+          <icosahedronGeometry args={[0.92, 3]} />
           <meshStandardMaterial
             color="#9a2238"
             emissive="#4a0f1d"
             emissiveIntensity={0.86}
-            metalness={0.5}
-            roughness={0.2}
+            metalness={0.58}
+            roughness={0.16}
           />
         </mesh>
-        <mesh position={[0, 2.5, 0.64]} rotation={[0.34, 0, 0]} scale={[0.5, 0.22, 0.12]}>
-          <boxGeometry args={[1.24, 1, 1]} />
-          <meshBasicMaterial color="#f5e2b4" opacity={0.7} transparent />
+        <mesh position={[0, 2.46, 0.54]} rotation={[0.22, 0, 0]} scale={[0.34, 0.9, 0.24]}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial color="#8d1f34" emissive="#4a0f1d" emissiveIntensity={0.58} metalness={0.62} roughness={0.18} />
         </mesh>
+        <mesh position={[0, 2.26, 0.7]} rotation={[0.4, 0, 0]} scale={[0.52, 0.16, 0.08]}>
+          <boxGeometry args={[1.16, 1, 1]} />
+          <meshBasicMaterial color="#f5e2b4" opacity={0.72} transparent />
+        </mesh>
+
+        <mesh position={[-0.34, 2.38, 0.48]} rotation={[0.18, -0.14, -0.18]} scale={[0.16, 0.46, 0.16]}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial color="#d0a355" emissive="#684714" emissiveIntensity={0.42} metalness={0.8} roughness={0.16} />
+        </mesh>
+        <mesh position={[0.34, 2.38, 0.48]} rotation={[0.18, 0.14, 0.18]} scale={[0.16, 0.46, 0.16]}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial color="#d0a355" emissive="#684714" emissiveIntensity={0.42} metalness={0.8} roughness={0.16} />
+        </mesh>
+
+        <mesh position={[0, 2.02, 0.68]} rotation={[0.36, 0, 0]} scale={[0.34, 0.18, 0.06]}>
+          <boxGeometry args={[1.28, 1, 1]} />
+          <meshStandardMaterial color="#c7943f" emissive="#5d390d" emissiveIntensity={0.38} metalness={0.84} roughness={0.14} />
+        </mesh>
+
+        <mesh position={[-0.42, 2.84, 0.24]} rotation={[0.16, -0.1, -0.36]} scale={[0.24, 0.5, 0.18]}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial color="#811b2d" emissive="#430c18" emissiveIntensity={0.5} metalness={0.74} roughness={0.14} />
+        </mesh>
+        <mesh position={[0.42, 2.84, 0.24]} rotation={[0.16, 0.1, 0.36]} scale={[0.24, 0.5, 0.18]}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial color="#811b2d" emissive="#430c18" emissiveIntensity={0.5} metalness={0.74} roughness={0.14} />
+        </mesh>
+
         <mesh position={[0, 2.92, 0.48]} rotation={[0.2, 0, 0]} scale={[0.24, 0.68, 0.14]}>
           <boxGeometry args={[1, 1, 1]} />
           <meshStandardMaterial color="#d5a95a" emissive="#684714" emissiveIntensity={0.56} metalness={0.82} roughness={0.14} />
@@ -116,6 +144,11 @@ export function HumanoidBust({ crystalRef }: { crystalRef: RefObject<Mesh | null
             roughness={0.04}
             thickness={0.92}
           />
+        </mesh>
+
+        <mesh position={[0, 3.34, -0.02]} rotation={[0.06, 0, 0]} scale={[0.58, 0.3, 0.5]}>
+          <sphereGeometry args={[1, 20, 20]} />
+          <meshStandardMaterial color="#7d1a2d" emissive="#3f0b18" emissiveIntensity={0.38} metalness={0.6} roughness={0.2} />
         </mesh>
       </group>
 
