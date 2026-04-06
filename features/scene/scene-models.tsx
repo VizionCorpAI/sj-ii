@@ -10,53 +10,100 @@ import type { ColorKey, SceneNode, Zone } from "@/lib/types";
 export function HumanoidBust({ crystalRef }: { crystalRef: RefObject<Mesh | null> }) {
   return (
     <group>
-      <group position={[0, 0.12, -0.16]}>
-        <mesh position={[0, -0.2, -0.05]} scale={[2.65, 1.28, 1.36]}>
-          <sphereGeometry args={[1, 42, 42]} />
-          <meshStandardMaterial color="#4f1120" emissive="#2d0815" emissiveIntensity={0.88} metalness={0.42} roughness={0.34} />
+      <group position={[0, 0.04, -0.22]}>
+        <mesh position={[0, -0.44, -0.12]} rotation={[0.08, 0, 0]} scale={[2.85, 1.38, 1.52]}>
+          <icosahedronGeometry args={[1, 3]} />
+          <meshStandardMaterial
+            color="#5e1324"
+            emissive="#2d0815"
+            emissiveIntensity={0.72}
+            metalness={0.58}
+            roughness={0.26}
+          />
         </mesh>
-
-        <mesh position={[0, 0.95, 0.08]} rotation={[0.2, 0, 0]} scale={[1.12, 0.78, 0.55]}>
-          <capsuleGeometry args={[0.74, 1.5, 14, 28]} />
-          <meshStandardMaterial color="#9b2639" emissive="#511221" emissiveIntensity={0.82} metalness={0.38} roughness={0.28} />
+        <mesh position={[0, 0.82, 0.02]} rotation={[0.14, 0, 0]} scale={[1.28, 0.9, 0.6]}>
+          <capsuleGeometry args={[0.72, 1.72, 14, 28]} />
+          <meshStandardMaterial
+            color="#a3263b"
+            emissive="#4a0f1d"
+            emissiveIntensity={0.74}
+            metalness={0.54}
+            roughness={0.22}
+          />
         </mesh>
-        <mesh position={[0, 0.58, 0.44]} rotation={[0.55, 0, 0]} scale={[0.82, 0.45, 0.22]}>
-          <sphereGeometry args={[1, 24, 24]} />
-          <meshStandardMaterial color="#d1a14b" emissive="#6d4818" emissiveIntensity={0.65} metalness={0.62} roughness={0.24} />
-        </mesh>
-
-        <mesh position={[-1.38, 0.96, -0.04]} rotation={[0.14, 0.08, -0.76]} scale={[0.6, 1.14, 0.62]}>
-          <capsuleGeometry args={[0.52, 1.36, 10, 20]} />
-          <meshStandardMaterial color="#6d1628" emissive="#370912" emissiveIntensity={0.7} metalness={0.45} roughness={0.34} />
-        </mesh>
-        <mesh position={[1.38, 0.96, -0.04]} rotation={[0.14, -0.08, 0.76]} scale={[0.6, 1.14, 0.62]}>
-          <capsuleGeometry args={[0.52, 1.36, 10, 20]} />
-          <meshStandardMaterial color="#6d1628" emissive="#370912" emissiveIntensity={0.7} metalness={0.45} roughness={0.34} />
-        </mesh>
-
-        <mesh position={[0, 2.62, 0]} scale={[0.96, 1.28, 0.98]}>
-          <sphereGeometry args={[0.86, 36, 36]} />
-          <meshStandardMaterial color="#8e2034" emissive="#4b0d1b" emissiveIntensity={0.94} metalness={0.36} roughness={0.26} />
-        </mesh>
-        <mesh position={[0, 2.34, 0.54]} rotation={[0.4, 0, 0]} scale={[0.52, 0.34, 0.22]}>
-          <sphereGeometry args={[1, 24, 24]} />
-          <meshStandardMaterial color="#ccac60" emissive="#6f4d20" emissiveIntensity={0.75} metalness={0.7} roughness={0.18} />
-        </mesh>
-
-        <mesh position={[0, 2.82, 0.38]} rotation={[0.28, 0, 0]} scale={[0.54, 0.76, 0.18]}>
+        <mesh position={[0, 0.48, 0.52]} rotation={[0.54, 0, 0]} scale={[0.92, 0.38, 0.2]}>
           <sphereGeometry args={[1, 28, 28]} />
-          <meshStandardMaterial color="#d9b56a" emissive="#704d16" emissiveIntensity={0.68} metalness={0.62} roughness={0.22} />
+          <meshStandardMaterial
+            color="#c8933b"
+            emissive="#694314"
+            emissiveIntensity={0.52}
+            metalness={0.72}
+            roughness={0.18}
+          />
         </mesh>
-        <mesh position={[0, 2.52, 0.78]} rotation={[0.32, 0, 0]} scale={[0.42, 0.18, 0.08]}>
-          <boxGeometry args={[1.2, 1, 1]} />
-          <meshBasicMaterial color="#f6dfb1" opacity={0.68} transparent />
+        <mesh position={[-1.62, 0.86, -0.12]} rotation={[0.2, 0.08, -0.88]} scale={[0.66, 1.32, 0.74]}>
+          <capsuleGeometry args={[0.48, 1.56, 12, 20]} />
+          <meshStandardMaterial
+            color="#6f1628"
+            emissive="#330814"
+            emissiveIntensity={0.58}
+            metalness={0.64}
+            roughness={0.24}
+          />
         </mesh>
-        <mesh position={[0, 2.94, 0.46]} rotation={[0.18, 0, 0]} scale={[0.22, 0.58, 0.12]}>
+        <mesh position={[1.62, 0.86, -0.12]} rotation={[0.2, -0.08, 0.88]} scale={[0.66, 1.32, 0.74]}>
+          <capsuleGeometry args={[0.48, 1.56, 12, 20]} />
+          <meshStandardMaterial
+            color="#6f1628"
+            emissive="#330814"
+            emissiveIntensity={0.58}
+            metalness={0.64}
+            roughness={0.24}
+          />
+        </mesh>
+        <mesh position={[-1.02, 0.08, -0.02]} rotation={[0.24, 0.12, -0.18]} scale={[0.34, 1.28, 0.34]}>
           <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial color="#d8b064" emissive="#6b4919" emissiveIntensity={0.64} metalness={0.65} roughness={0.18} />
+          <meshStandardMaterial color="#d6a253" emissive="#593611" emissiveIntensity={0.38} metalness={0.82} roughness={0.16} />
         </mesh>
-        <mesh position={[0, 3.05, 0.9]} rotation={[0.08, 0.24, 0.18]} ref={crystalRef}>
-          <octahedronGeometry args={[0.3, 0]} />
+        <mesh position={[1.02, 0.08, -0.02]} rotation={[0.24, -0.12, 0.18]} scale={[0.34, 1.28, 0.34]}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial color="#d6a253" emissive="#593611" emissiveIntensity={0.38} metalness={0.82} roughness={0.16} />
+        </mesh>
+        <mesh position={[0, 2.58, 0.02]} scale={[0.82, 1.22, 0.9]}>
+          <sphereGeometry args={[0.88, 42, 42]} />
+          <meshStandardMaterial
+            color="#9a2238"
+            emissive="#4a0f1d"
+            emissiveIntensity={0.86}
+            metalness={0.5}
+            roughness={0.2}
+          />
+        </mesh>
+        <mesh position={[0, 2.5, 0.64]} rotation={[0.34, 0, 0]} scale={[0.5, 0.22, 0.12]}>
+          <boxGeometry args={[1.24, 1, 1]} />
+          <meshBasicMaterial color="#f5e2b4" opacity={0.7} transparent />
+        </mesh>
+        <mesh position={[0, 2.92, 0.48]} rotation={[0.2, 0, 0]} scale={[0.24, 0.68, 0.14]}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial color="#d5a95a" emissive="#684714" emissiveIntensity={0.56} metalness={0.82} roughness={0.14} />
+        </mesh>
+
+        <mesh position={[0, 3.06, 0.34]} rotation={[0.16, 0, 0]} scale={[0.34, 0.18, 0.08]}>
+          <boxGeometry args={[1.18, 1, 1]} />
+          <meshStandardMaterial color="#cf9b45" emissive="#6c4311" emissiveIntensity={0.46} metalness={0.86} roughness={0.12} />
+        </mesh>
+
+        <mesh position={[-0.26, 2.84, 0.72]} rotation={[0.3, 0.18, -0.2]} scale={[0.08, 0.18, 0.08]}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshBasicMaterial color="#f3deb0" opacity={0.62} transparent />
+        </mesh>
+        <mesh position={[0.26, 2.84, 0.72]} rotation={[0.3, -0.18, 0.2]} scale={[0.08, 0.18, 0.08]}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshBasicMaterial color="#f3deb0" opacity={0.62} transparent />
+        </mesh>
+
+        <mesh position={[0, 3.08, 0.94]} rotation={[0.08, 0.24, 0.18]} ref={crystalRef}>
+          <octahedronGeometry args={[0.24, 0]} />
           <MeshTransmissionMaterial
             anisotropy={0.6}
             chromaticAberration={0.045}
@@ -72,15 +119,15 @@ export function HumanoidBust({ crystalRef }: { crystalRef: RefObject<Mesh | null
         </mesh>
       </group>
 
-      <mesh position={[0, 1.48, 0.14]} rotation={[0.12, 0, 0]} scale={[0.1, 4.1, 0.1]}>
+      <mesh position={[0, 1.42, 0.16]} rotation={[0.12, 0, 0]} scale={[0.08, 4.35, 0.08]}>
         <capsuleGeometry args={[1, 1, 10, 16]} />
         <meshBasicMaterial color="#ffd36a" opacity={0.16} transparent />
       </mesh>
-      <mesh position={[-0.55, 1.42, 0.18]} rotation={[0.2, 0.04, -0.5]} scale={[0.08, 2.3, 0.08]}>
+      <mesh position={[-0.58, 1.3, 0.22]} rotation={[0.18, 0.04, -0.54]} scale={[0.07, 2.5, 0.07]}>
         <capsuleGeometry args={[1, 1, 8, 14]} />
         <meshBasicMaterial color="#ff7c5a" opacity={0.14} transparent />
       </mesh>
-      <mesh position={[0.58, 1.36, 0.15]} rotation={[0.16, -0.04, 0.52]} scale={[0.08, 2.45, 0.08]}>
+      <mesh position={[0.58, 1.28, 0.18]} rotation={[0.16, -0.04, 0.52]} scale={[0.07, 2.55, 0.07]}>
         <capsuleGeometry args={[1, 1, 8, 14]} />
         <meshBasicMaterial color="#ffb86a" opacity={0.14} transparent />
       </mesh>
@@ -168,12 +215,19 @@ export function NodeModel({
   const color = getColorByKey(node.colorKey);
   const opacity = isDimmed ? 0.22 : 1;
   const baseScale = isSelected ? 1.24 : isHovered ? 1.08 : 1;
+  const profile = getNodeProfile(node);
 
   return (
     <Float floatIntensity={isMobile ? 0.22 : 0.55} rotationIntensity={0.18} speed={1.2}>
       <group scale={baseScale}>
-        <PlanetShell color={color} isSelected={isSelected} opacity={opacity} zone={node.zone} />
-        <NodeSatellites color={color} zone={node.zone} />
+        <PlanetShell
+          color={color}
+          isSelected={isSelected}
+          opacity={opacity}
+          profile={profile}
+          zone={node.zone}
+        />
+        <NodeSatellites color={color} profile={profile} zone={node.zone} />
       </group>
     </Float>
   );
@@ -183,18 +237,20 @@ function PlanetShell({
   zone,
   color,
   opacity,
-  isSelected
+  isSelected,
+  profile
 }: {
   zone: Zone;
   color: string;
   opacity: number;
   isSelected: boolean;
+  profile: NodeProfile;
 }) {
   if (zone === "core") {
     return (
       <group>
         <mesh>
-          <icosahedronGeometry args={[0.4, 2]} />
+          <icosahedronGeometry args={[profile.primaryScale, profile.detail]} />
           <MeshTransmissionMaterial
             chromaticAberration={0.04}
             color={color}
@@ -206,8 +262,8 @@ function PlanetShell({
             transparent
           />
         </mesh>
-        <mesh rotation={[Math.PI / 2, 0, 0]}>
-          <torusGeometry args={[0.62, 0.032, 18, 72]} />
+        <mesh rotation={[Math.PI / 2, 0, profile.ringTilt]}>
+          <torusGeometry args={[profile.ringRadius, 0.032, 18, 72]} />
           <meshBasicMaterial color="#dffcff" opacity={0.58 * opacity} transparent />
         </mesh>
       </group>
@@ -218,9 +274,9 @@ function PlanetShell({
     return (
       <group>
         <mesh>
-          <dodecahedronGeometry args={[0.38, 1]} />
+          <dodecahedronGeometry args={[profile.primaryScale, profile.detail]} />
           <meshStandardMaterial
-            color="#0d1a2e"
+            color={profile.surfaceColor}
             emissive={color}
             emissiveIntensity={isSelected ? 1.5 : 0.95}
             metalness={0.72}
@@ -229,9 +285,13 @@ function PlanetShell({
             transparent
           />
         </mesh>
-        <mesh rotation={[0.5, Math.PI / 2.5, 0.18]}>
-          <torusGeometry args={[0.58, 0.022, 12, 72]} />
+        <mesh rotation={[0.5, Math.PI / 2.5, profile.ringTilt]}>
+          <torusGeometry args={[profile.ringRadius, 0.022, 12, 72]} />
           <meshBasicMaterial color={color} opacity={0.34 * opacity} transparent />
+        </mesh>
+        <mesh position={[0.46, -0.18, 0.14]} rotation={[0.32, 0.4, 0]} scale={[0.22, 0.18, 0.2]}>
+          <dodecahedronGeometry args={[1, 1]} />
+          <meshStandardMaterial color={profile.moonColor} emissive={color} emissiveIntensity={0.35} metalness={0.62} roughness={0.24} opacity={0.9 * opacity} transparent />
         </mesh>
       </group>
     );
@@ -240,10 +300,10 @@ function PlanetShell({
   return (
     <group>
       <mesh>
-        <octahedronGeometry args={[0.36, 1]} />
+        <icosahedronGeometry args={[profile.primaryScale, profile.detail]} />
         <MeshDistortMaterial
-          color={color}
-          distort={0.34}
+          color={profile.surfaceColor}
+          distort={profile.distort}
           emissive={color}
           emissiveIntensity={isSelected ? 1.9 : 1.25}
           metalness={0.16}
@@ -253,23 +313,35 @@ function PlanetShell({
           transparent
         />
       </mesh>
-      <mesh rotation={[0.8, 0.38, 0.3]}>
-        <torusKnotGeometry args={[0.44, 0.05, 88, 12]} />
-        <meshBasicMaterial color={color} opacity={0.22 * opacity} transparent />
+      <mesh rotation={[profile.secondaryTilt, 0.38, 0.3]}>
+        <torusGeometry args={[profile.ringRadius, 0.04, 14, 72]} />
+        <meshBasicMaterial color={profile.ringColor} opacity={0.28 * opacity} transparent />
+      </mesh>
+      <mesh position={[-0.52, 0.24, 0.08]} rotation={[0.2, 0.4, 0.1]} scale={[0.18, 0.16, 0.14]}>
+        <icosahedronGeometry args={[1, 1]} />
+        <meshStandardMaterial color={profile.moonColor} emissive={profile.ringColor} emissiveIntensity={0.2} roughness={0.46} metalness={0.08} opacity={0.92 * opacity} transparent />
       </mesh>
     </group>
   );
 }
 
-function NodeSatellites({ color, zone }: { color: string; zone: Zone }) {
+function NodeSatellites({
+  color,
+  profile,
+  zone
+}: {
+  color: string;
+  profile: NodeProfile;
+  zone: Zone;
+}) {
   if (zone === "core") {
     return (
       <>
-        <mesh position={[0.82, 0.12, -0.06]}>
+        <mesh position={[profile.ringRadius + 0.2, 0.12, -0.06]}>
           <boxGeometry args={[0.08, 0.46, 0.04]} />
           <meshBasicMaterial color="#dffcff" opacity={0.46} transparent />
         </mesh>
-        <mesh position={[-0.78, -0.12, 0.08]} rotation={[0.18, 0.2, 0.3]}>
+        <mesh position={[-profile.ringRadius - 0.16, -0.12, 0.08]} rotation={[0.18, 0.2, 0.3]}>
           <boxGeometry args={[0.08, 0.32, 0.04]} />
           <meshBasicMaterial color={color} opacity={0.36} transparent />
         </mesh>
@@ -280,11 +352,11 @@ function NodeSatellites({ color, zone }: { color: string; zone: Zone }) {
   if (zone === "left") {
     return (
       <>
-        <mesh position={[0.62, 0.2, 0.04]}>
+        <mesh position={[profile.ringRadius + 0.04, 0.2, 0.04]}>
           <boxGeometry args={[0.12, 0.12, 0.12]} />
           <meshBasicMaterial color={color} opacity={0.52} transparent />
         </mesh>
-        <mesh position={[-0.58, -0.16, -0.02]}>
+        <mesh position={[-profile.ringRadius, -0.16, -0.02]}>
           <octahedronGeometry args={[0.1, 0]} />
           <meshBasicMaterial color="#d7f7ff" opacity={0.5} transparent />
         </mesh>
@@ -294,16 +366,73 @@ function NodeSatellites({ color, zone }: { color: string; zone: Zone }) {
 
   return (
     <>
-      <mesh position={[0.66, 0.16, 0]}>
+      <mesh position={[profile.ringRadius + 0.08, 0.16, 0]}>
         <sphereGeometry args={[0.08, 16, 16]} />
         <meshBasicMaterial color="#ffe0ca" opacity={0.58} transparent />
       </mesh>
-      <mesh position={[-0.5, -0.22, 0.05]} rotation={[0.12, 0.2, 0.4]}>
+      <mesh position={[-profile.ringRadius + 0.02, -0.22, 0.05]} rotation={[0.12, 0.2, 0.4]}>
         <coneGeometry args={[0.08, 0.28, 6]} />
         <meshBasicMaterial color={color} opacity={0.42} transparent />
       </mesh>
     </>
   );
+}
+
+type NodeProfile = {
+  primaryScale: number;
+  detail: number;
+  distort: number;
+  ringRadius: number;
+  ringTilt: number;
+  secondaryTilt: number;
+  surfaceColor: string;
+  ringColor: string;
+  moonColor: string;
+};
+
+function getNodeProfile(node: SceneNode): NodeProfile {
+  if (node.zone === "core") {
+    return {
+      primaryScale: node.id === "iam-vizion" ? 0.46 : 0.4,
+      detail: 2,
+      distort: 0.12,
+      ringRadius: node.id === "collaborate" ? 0.78 : 0.62,
+      ringTilt: node.id === "logic-art" ? 0.44 : 0.14,
+      secondaryTilt: 0.4,
+      surfaceColor: "#bdf5ff",
+      ringColor: "#e8fcff",
+      moonColor: "#9be8ff"
+    };
+  }
+
+  if (node.zone === "left") {
+    return {
+      primaryScale:
+        node.id === "projects" || node.id === "experience-archive" ? 0.46 : 0.38,
+      detail: node.id === "security" ? 2 : 1,
+      distort: 0.1,
+      ringRadius: node.id === "architecture" ? 0.68 : 0.58,
+      ringTilt: node.id === "cloud-systems" ? 0.5 : 0.16,
+      secondaryTilt: 0.5,
+      surfaceColor:
+        node.id === "security" ? "#1e2b42" : node.id === "projects" ? "#2d3d58" : "#0d1a2e",
+      ringColor: "#43c6ff",
+      moonColor: "#8fc7e8"
+    };
+  }
+
+  return {
+    primaryScale: node.id === "gallery" ? 0.48 : 0.38,
+    detail: node.id === "dream-layer" ? 2 : 1,
+    distort: node.id === "dream-layer" ? 0.48 : 0.34,
+    ringRadius: node.id === "music" ? 0.72 : 0.58,
+    ringTilt: 0.3,
+    secondaryTilt: node.id === "music" ? 1.2 : 0.8,
+    surfaceColor:
+      node.id === "music" ? "#d05b56" : node.id === "dream-layer" ? "#8f5cd6" : "#ff8f52",
+    ringColor: node.id === "music" ? "#ffcf90" : "#ffb06d",
+    moonColor: node.id === "dream-layer" ? "#c6b2ff" : "#ffe0ca"
+  };
 }
 
 export function SelectedMemoryShard({

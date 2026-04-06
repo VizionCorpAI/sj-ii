@@ -17,7 +17,12 @@ import {
   SelectedMemoryShard
 } from "./scene-models";
 
-const coreTarget = new Vector3(0, 0, 7.5);
+const UNIVERSE_SCALE = 1.28;
+const coreTarget = new Vector3(0, 0, 10.6);
+
+function scalePosition(position: [number, number, number]): [number, number, number] {
+  return [position[0] * UNIVERSE_SCALE, position[1] * UNIVERSE_SCALE, position[2] * UNIVERSE_SCALE];
+}
 
 export function SceneStage() {
   const introPhase = useSceneStore((state) => state.introPhase);
@@ -109,12 +114,20 @@ export function SceneStage() {
     if (introPhase === "universe") {
       const targetNode = sceneNodes.find((node) => node.id === selectedNodeId);
       const desired = targetNode
-        ? new Vector3(targetNode.position[0], targetNode.position[1], isMobile ? 7.2 : 5.8)
+        ? new Vector3(
+            targetNode.position[0] * UNIVERSE_SCALE,
+            targetNode.position[1] * UNIVERSE_SCALE,
+            isMobile ? 10.4 : 8.6
+          )
         : coreTarget;
 
       camera.position.lerp(desired, 0.045);
       const lookTarget = targetNode
-        ? new Vector3(targetNode.position[0], targetNode.position[1], targetNode.position[2])
+        ? new Vector3(
+            targetNode.position[0] * UNIVERSE_SCALE,
+            targetNode.position[1] * UNIVERSE_SCALE,
+            targetNode.position[2] * UNIVERSE_SCALE
+          )
         : new Vector3(0, 0, 0);
       camera.lookAt(lookTarget);
     } else {
@@ -182,9 +195,17 @@ export function SceneStage() {
 function ZoneAtmospheres() {
   return (
     <group>
-      <HemisphereAura color="#43c6ff" position={[-5.8, 0.15, -1.6]} scale={[7.4, 4.5, 1]} />
-      <HemisphereAura color="#ff8f52" position={[5.8, 0.15, -1.6]} scale={[7.4, 4.5, 1]} />
-      <HemisphereAura color="#9be8ff" position={[0, 0.05, -1.2]} scale={[4.6, 3.2, 1]} />
+      <HemisphereAura
+        color="#43c6ff"
+        position={[-5.8 * UNIVERSE_SCALE, 0.15, -1.9]}
+        scale={[9.1, 5.5, 1]}
+      />
+      <HemisphereAura
+        color="#ff8f52"
+        position={[5.8 * UNIVERSE_SCALE, 0.15, -1.9]}
+        scale={[9.1, 5.5, 1]}
+      />
+      <HemisphereAura color="#9be8ff" position={[0, 0.05, -1.4]} scale={[5.6, 3.8, 1]} />
       <CorePulse />
     </group>
   );
@@ -269,7 +290,7 @@ function NodeObject({
     focusZone !== "all" && focusZone !== node.zone && !isSelected && selectedZone !== node.zone;
 
   return (
-    <group position={node.position}>
+    <group position={scalePosition(node.position)}>
       <group
         onClick={onSelect}
         onPointerEnter={() => hoverNode(node.id)}
@@ -353,7 +374,7 @@ function ConnectionWeb({ selectedNodeId }: { selectedNodeId: string | null }) {
                 key={`${node.id}-${connectionId}`}
                 lineWidth={isActive ? 1.8 : 0.7}
                 opacity={isActive ? 0.9 : 0.3}
-                points={[node.position, target.position]}
+                points={[scalePosition(node.position), scalePosition(target.position)]}
                 transparent
               />
             );
@@ -379,7 +400,7 @@ function MemoryShards({
   const color = getColorByKey(selectedNode.colorKey);
 
   return (
-    <group position={selectedNode.position}>
+    <group position={scalePosition(selectedNode.position)}>
       <SelectedMemoryShard color={selectedNode.colorKey} isMobile={isMobile} />
       <Sparkles
         count={8}
