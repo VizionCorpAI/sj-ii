@@ -12,6 +12,16 @@ export function PanelOverlay() {
 
   const selectedNode = sceneNodes.find((node) => node.id === selectedNodeId);
   const panel = selectedNode ? panelIndex[selectedNode.panelKey] : null;
+  const siblingNodes = selectedNode
+    ? sceneNodes.filter((node) => node.zone === selectedNode.zone)
+    : [];
+  const siblingIndex = selectedNode
+    ? siblingNodes.findIndex((node) => node.id === selectedNode.id)
+    : -1;
+  const previousNode =
+    siblingIndex >= 0 ? siblingNodes[(siblingIndex - 1 + siblingNodes.length) % siblingNodes.length] : null;
+  const nextNode =
+    siblingIndex >= 0 ? siblingNodes[(siblingIndex + 1) % siblingNodes.length] : null;
 
   useEffect(() => {
     if (!selectedNodeId) {
@@ -61,6 +71,21 @@ export function PanelOverlay() {
               <span className={styles.zone}>{selectedNode.zone}</span>
               <h2>{panel.title}</h2>
               <p>{panel.summary}</p>
+            </div>
+
+            <div className={styles.panelNav}>
+              <button
+                onClick={() => previousNode && selectNode(previousNode.id, previousNode.zone)}
+                type="button"
+              >
+                Prev: {previousNode?.label ?? "None"}
+              </button>
+              <button
+                onClick={() => nextNode && selectNode(nextNode.id, nextNode.zone)}
+                type="button"
+              >
+                Next: {nextNode?.label ?? "None"}
+              </button>
             </div>
 
             <div className={styles.body}>

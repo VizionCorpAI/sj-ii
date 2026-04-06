@@ -62,6 +62,21 @@
   gap: 1rem;
 }
 
+.panelNav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.panelNav button {
+  border: 1px solid rgba(155, 232, 255, 0.12);
+  border-radius: 1rem;
+  padding: 0.8rem 0.9rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(247, 251, 255, 0.86);
+  text-align: left;
+}
+
 .section {
   padding-top: 0.85rem;
   border-top: 1px solid rgba(155, 232, 255, 0.1);
@@ -127,5 +142,9 @@
     bottom: 8rem;
     width: auto;
     max-height: 48vh;
+  }
+
+  .panelNav {
+    grid-template-columns: 1fr;
   }
 }

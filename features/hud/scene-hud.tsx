@@ -12,6 +12,7 @@ export function SceneHud() {
   const dismissIntro = useSceneStore((state) => state.dismissIntro);
   const selectNode = useSceneStore((state) => state.selectNode);
   const isMobile = useSceneStore((state) => state.isMobile);
+  const focusZone = useSceneStore((state) => state.focusZone);
 
   const selectedNode = sceneNodes.find((node) => node.id === selectedNodeId) ?? null;
   const navNodes = sceneNodes.filter((node) =>
@@ -19,6 +20,19 @@ export function SceneHud() {
       node.id
     )
   );
+  const zoneAnchors = {
+    core: sceneNodes.find((node) => node.id === "iam-vizion"),
+    left: sceneNodes.find((node) => node.id === "architecture"),
+    right: sceneNodes.find((node) => node.id === "music")
+  } as const;
+  const statusCopy =
+    introPhase !== "universe"
+      ? "Portal sequence in progress"
+      : selectedNode
+        ? `Focused on ${selectedNode.label}`
+        : focusZone === "all"
+          ? "Free orbit across the inner cosmos"
+          : `Scanning ${focusZone} hemisphere`;
 
   return (
     <>
@@ -51,11 +65,37 @@ export function SceneHud() {
         <div>
           <span className={styles.eyebrow}>VIZION / INNER COSMOS</span>
           <p>{isMobile ? "drag | pinch | select | return to core" : "drag | zoom | select | return to core"}</p>
+          <span className={styles.status}>{statusCopy}</span>
         </div>
-        <div className={styles.legend}>
-          <span className={styles.core}>Core</span>
-          <span className={styles.left}>Engineering</span>
-          <span className={styles.right}>Creative</span>
+        <div className={styles.topMeta}>
+          <div className={styles.legend}>
+            <span className={styles.core}>Core</span>
+            <span className={styles.left}>Engineering</span>
+            <span className={styles.right}>Creative</span>
+          </div>
+          <div className={styles.zoneMap}>
+            <button
+              className={focusZone === "left" ? styles.zoneMapActiveLeft : undefined}
+              onClick={() => zoneAnchors.left && selectNode(zoneAnchors.left.id, "left")}
+              type="button"
+            >
+              Left
+            </button>
+            <button
+              className={focusZone === "core" ? styles.zoneMapActiveCore : undefined}
+              onClick={() => zoneAnchors.core && selectNode(zoneAnchors.core.id, "core")}
+              type="button"
+            >
+              Core
+            </button>
+            <button
+              className={focusZone === "right" ? styles.zoneMapActiveRight : undefined}
+              onClick={() => zoneAnchors.right && selectNode(zoneAnchors.right.id, "right")}
+              type="button"
+            >
+              Right
+            </button>
+          </div>
         </div>
       </div>
 
