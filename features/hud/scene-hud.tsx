@@ -11,6 +11,7 @@ export function SceneHud() {
   const returnToCore = useSceneStore((state) => state.returnToCore);
   const dismissIntro = useSceneStore((state) => state.dismissIntro);
   const selectNode = useSceneStore((state) => state.selectNode);
+  const isMobile = useSceneStore((state) => state.isMobile);
 
   const selectedNode = sceneNodes.find((node) => node.id === selectedNodeId) ?? null;
   const navNodes = sceneNodes.filter((node) =>
@@ -49,7 +50,7 @@ export function SceneHud() {
       <div className={styles.topBar}>
         <div>
           <span className={styles.eyebrow}>VIZION / INNER COSMOS</span>
-          <p>drag • zoom • select • return to core</p>
+          <p>{isMobile ? "drag | pinch | select | return to core" : "drag | zoom | select | return to core"}</p>
         </div>
         <div className={styles.legend}>
           <span className={styles.core}>Core</span>

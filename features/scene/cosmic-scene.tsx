@@ -9,6 +9,8 @@ import styles from "@/styles/cosmic-scene.module.css";
 
 export function CosmicScene() {
   const cameraMode = useSceneStore((state) => state.cameraMode);
+  const isMobile = useSceneStore((state) => state.isMobile);
+  const reducedMotion = useSceneStore((state) => state.reducedMotion);
 
   return (
     <div className={styles.canvasWrap}>
@@ -21,13 +23,13 @@ export function CosmicScene() {
         <Suspense fallback={null}>
           <AdaptiveDpr pixelated />
           <Stars
-            count={1600}
+            count={isMobile || reducedMotion ? 900 : 1600}
             depth={50}
             fade
-            factor={3}
+            factor={isMobile ? 2.1 : 3}
             radius={48}
             saturation={0}
-            speed={0.65}
+            speed={reducedMotion ? 0.2 : 0.65}
           />
           <SceneStage />
           <OrbitControls

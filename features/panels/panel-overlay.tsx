@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { panelIndex, sceneNodes } from "@/content/portfolio-data";
 import { useSceneStore } from "@/lib/scene-store";
@@ -11,6 +12,21 @@ export function PanelOverlay() {
 
   const selectedNode = sceneNodes.find((node) => node.id === selectedNodeId);
   const panel = selectedNode ? panelIndex[selectedNode.panelKey] : null;
+
+  useEffect(() => {
+    if (!selectedNodeId) {
+      return;
+    }
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        selectNode(null);
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [selectedNodeId, selectNode]);
 
   return (
     <AnimatePresence>

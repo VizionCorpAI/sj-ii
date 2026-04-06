@@ -59,4 +59,5 @@ export interface SceneState {
   focusZone: Zone | "all";
   introDismissed: boolean;
   reducedMotion: boolean;
+  isMobile: boolean;
 }

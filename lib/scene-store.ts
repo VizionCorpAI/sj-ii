@@ -10,6 +10,7 @@ interface SceneActions {
   returnToCore: () => void;
   dismissIntro: () => void;
   setReducedMotion: (value: boolean) => void;
+  setIsMobile: (value: boolean) => void;
 }
 
 type SceneStore = SceneState & SceneActions;
@@ -27,6 +28,7 @@ export const useSceneStore = create<SceneStore>((set) => ({
   focusZone: "all",
   introDismissed: seenIntro,
   reducedMotion: false,
+  isMobile: false,
   setIntroPhase: (phase) =>
     set((state) => ({
       introPhase: phase,
@@ -54,5 +56,6 @@ export const useSceneStore = create<SceneStore>((set) => ({
       cameraMode: "orbit"
     });
   },
-  setReducedMotion: (value) => set({ reducedMotion: value })
+  setReducedMotion: (value) => set({ reducedMotion: value }),
+  setIsMobile: (value) => set({ isMobile: value })
 }));
