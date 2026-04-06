@@ -9,6 +9,12 @@ import { sceneNodes } from "@/content/portfolio-data";
 import { useSceneStore } from "@/lib/scene-store";
 import { getColorByKey } from "@/lib/scene-utils";
 import type { SceneNode, Zone } from "@/lib/types";
+import {
+  CrystalPortalHalo,
+  HumanoidBust,
+  NodeModel,
+  SelectedMemoryShard
+} from "./scene-models";
 
 const coreTarget = new Vector3(0, 0, 7.5);
 
@@ -127,42 +133,8 @@ export function SceneStage() {
       <group ref={groupRef}>
         {introPhase !== "universe" ? (
           <group ref={humanoidRef}>
-            <HumanoidEnergy />
-            <mesh position={[0, 0.75, 0]}>
-              <capsuleGeometry args={[0.9, 2.2, 12, 24]} />
-              <meshStandardMaterial color="#0b1220" emissive="#081320" emissiveIntensity={0.55} />
-            </mesh>
-            <mesh position={[0, 2.7, 0]}>
-              <sphereGeometry args={[0.78, 32, 32]} />
-              <meshStandardMaterial color="#121a2d" emissive="#0c1833" emissiveIntensity={0.7} />
-            </mesh>
-            <mesh position={[-1.2, 1.2, 0]} rotation={[0, 0, 0.4]}>
-              <capsuleGeometry args={[0.22, 1.8, 8, 14]} />
-              <meshStandardMaterial color="#10192a" emissive="#081320" emissiveIntensity={0.35} />
-            </mesh>
-            <mesh position={[1.2, 1.2, 0]} rotation={[0, 0, -0.4]}>
-              <capsuleGeometry args={[0.22, 1.8, 8, 14]} />
-              <meshStandardMaterial color="#10192a" emissive="#081320" emissiveIntensity={0.35} />
-            </mesh>
-            <mesh ref={portalRef} position={[0, 2.9, 0.72]}>
-              <octahedronGeometry args={[0.28, 0]} />
-              <meshStandardMaterial
-                color="#d5ffff"
-                emissive="#6af1ff"
-                emissiveIntensity={4.8}
-                metalness={0.2}
-                roughness={0.12}
-              />
-            </mesh>
-            <Sparkles
-              count={65}
-              color="#8deaff"
-              position={[0, 2.85, 0.7]}
-              scale={[1.2, 0.7, 0.7]}
-              size={3.2}
-              speed={0.5}
-            />
-            <PortalHalo />
+            <HumanoidBust crystalRef={portalRef} />
+            <CrystalPortalHalo />
           </group>
         ) : null}
 
@@ -201,46 +173,6 @@ export function SceneStage() {
         ) : null}
       </group>
     </>
-  );
-}
-
-function HumanoidEnergy() {
-  const filaments = [
-    { position: [0, 1.7, 0.35], rotation: [0.2, 0, 0.1], scale: [0.05, 2.6, 0.05] },
-    { position: [-0.38, 1.4, 0.28], rotation: [0.1, 0.1, -0.48], scale: [0.04, 1.9, 0.04] },
-    { position: [0.42, 1.35, 0.3], rotation: [0.14, -0.12, 0.44], scale: [0.04, 2.1, 0.04] },
-    { position: [0, 0.45, 0.26], rotation: [0, 0, 0], scale: [0.05, 1.6, 0.05] }
-  ] as const;
-
-  return (
-    <group>
-      {filaments.map((filament, index) => (
-        <mesh
-          key={`filament-${index}`}
-          position={filament.position}
-          rotation={filament.rotation}
-          scale={filament.scale}
-        >
-          <capsuleGeometry args={[1, 1, 8, 12]} />
-          <meshBasicMaterial color="#66dfff" opacity={0.22} transparent />
-        </mesh>
-      ))}
-    </group>
-  );
-}
-
-function PortalHalo() {
-  return (
-    <group position={[0, 2.9, 0.64]}>
-      <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[0.52, 0.012, 16, 64]} />
-        <meshBasicMaterial color="#91ecff" opacity={0.9} transparent />
-      </mesh>
-      <mesh rotation={[Math.PI / 2, Math.PI / 3, 0]}>
-        <torusGeometry args={[0.74, 0.01, 16, 64]} />
-        <meshBasicMaterial color="#ffd36a" opacity={0.45} transparent />
-      </mesh>
-    </group>
   );
 }
 
@@ -313,43 +245,22 @@ function NodeObject({
   const color = getColorByKey(node.colorKey);
   const isDimmed =
     focusZone !== "all" && focusZone !== node.zone && !isSelected && selectedZone !== node.zone;
-  const scale = isSelected ? 1.45 : isHovered ? 1.18 : 1;
-  const opacity = isDimmed ? 0.2 : 1;
-  const satellitePositions = useMemo<[number, number, number][]>(
-    () => [
-      [0.55, 0.18, 0],
-      [-0.48, -0.12, 0.05],
-      [0.16, -0.52, -0.08]
-    ],
-    []
-  );
 
   return (
     <group position={node.position}>
-      <mesh
+      <group
         onClick={onSelect}
         onPointerEnter={() => hoverNode(node.id)}
         onPointerLeave={() => hoverNode(null)}
-        scale={scale}
       >
-        <sphereGeometry args={[0.34, 32, 32]} />
-        <meshStandardMaterial
-          color={color}
-          emissive={color}
-          emissiveIntensity={isSelected ? 2.4 : isHovered ? 1.8 : 1.2}
-          metalness={0.25}
-          opacity={opacity}
-          roughness={0.28}
-          transparent
+        <NodeModel
+          isDimmed={isDimmed}
+          isHovered={isHovered}
+          isMobile={isMobile}
+          isSelected={isSelected}
+          node={node}
         />
-      </mesh>
-
-      {satellitePositions.map((position, index) => (
-        <mesh key={`${node.id}-sat-${index}`} position={position}>
-          <sphereGeometry args={[0.06 + index * 0.03, 16, 16]} />
-          <meshBasicMaterial color={color} opacity={0.65 * opacity} transparent />
-        </mesh>
-      ))}
+      </group>
 
       {(isHovered || isSelected) ? (
         <>
@@ -444,24 +355,18 @@ function MemoryShards({
   }
 
   const color = getColorByKey(selectedNode.colorKey);
-  const shards = [
-    [0.85, 0.52, 0.15],
-    [-0.95, 0.15, -0.12],
-    [0.35, -0.85, 0.08]
-  ] as const;
 
   return (
     <group position={selectedNode.position}>
-      {shards.map((offset, index) => (
-        <mesh
-          key={`${selectedNode.id}-memory-${index}`}
-          position={offset}
-          rotation={[0.4 * index, 0.3 + index * 0.2, 0.2]}
-        >
-          <boxGeometry args={[isMobile ? 0.2 : 0.28, isMobile ? 0.38 : 0.52, 0.02]} />
-          <meshBasicMaterial color={color} opacity={0.38 - index * 0.06} transparent />
-        </mesh>
-      ))}
+      <SelectedMemoryShard color={selectedNode.colorKey} isMobile={isMobile} />
+      <Sparkles
+        count={8}
+        color={color}
+        position={[0, 0, 0]}
+        scale={[1.8, 1.8, 1.8]}
+        size={4.5}
+        speed={0.45}
+      />
     </group>
   );
 }
