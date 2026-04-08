@@ -144,14 +144,10 @@ body {
   display: grid;
   align-content: end;
   min-height: 100vh;
-  width: min(100%, 44rem);
+  width: min(100%, 34rem);
   padding: 2rem 1.25rem 2.5rem;
-  background: linear-gradient(
-    90deg,
-    rgba(2, 4, 9, 0.82) 0%,
-    rgba(2, 4, 9, 0.5) 55%,
-    transparent 100%
-  );
+  margin-left: auto;
+  text-align: right;
 }
 
 .about-copy {
@@ -248,23 +244,6 @@ body {
   margin-left: auto;
 }
 
-.face-focus-ring {
-  position: absolute;
-  top: 22%;
-  left: 50%;
-  z-index: 1;
-  width: min(18rem, 34vw);
-  aspect-ratio: 1;
-  transform: translateX(-50%);
-  border: 1px solid rgba(116, 240, 255, 0.45);
-  border-radius: 999px;
-  box-shadow:
-    0 0 24px rgba(116, 240, 255, 0.18),
-    inset 0 0 30px rgba(116, 240, 255, 0.08);
-  animation: pulse-ring 2.2s ease-in-out infinite;
-  pointer-events: none;
-}
-
 .transition-gate {
   position: absolute;
   inset: 0;
@@ -288,7 +267,6 @@ body {
 
 .is-entering .scene-layer,
 .is-entering .hero-copy,
-.is-entering .face-focus-ring,
 .is-entering .scene-vignette {
   animation: fade-away 900ms ease forwards;
 }
@@ -299,19 +277,6 @@ body {
 
 .is-entering .transition-core {
   animation: gate-zoom 900ms cubic-bezier(0.19, 1, 0.22, 1) forwards;
-}
-
-@keyframes pulse-ring {
-  0%,
-  100% {
-    transform: translateX(-50%) scale(0.96);
-    opacity: 0.56;
-  }
-
-  50% {
-    transform: translateX(-50%) scale(1.04);
-    opacity: 1;
-  }
 }
 
 @keyframes fade-away {
@@ -356,15 +321,11 @@ body {
 
 @media (max-width: 700px) {
   .hero-copy {
-    width: 100%;
+    width: min(100%, 20rem);
     padding: 1.25rem 1rem 1.5rem;
     align-content: end;
-    background: linear-gradient(
-      180deg,
-      rgba(2, 4, 9, 0.18) 0%,
-      rgba(2, 4, 9, 0.36) 48%,
-      rgba(2, 4, 9, 0.82) 100%
-    );
+    margin-left: auto;
+    text-align: right;
   }
 
   .summary {
@@ -392,11 +353,6 @@ body {
     min-width: 4.75rem;
     padding: 0.7rem 0.85rem;
     font-size: 0.78rem;
-  }
-
-  .face-focus-ring {
-    top: 24%;
-    width: min(14rem, 56vw);
   }
 
   .about-panel {

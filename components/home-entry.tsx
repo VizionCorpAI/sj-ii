@@ -51,11 +51,9 @@ export function HomeEntry() {
       </div>
 
       <div className="scene-vignette" aria-hidden="true" />
-      <div className="face-focus-ring" aria-hidden="true" />
 
       <section className="hero-copy">
-        <p className="eyebrow">Home</p>
-        <h1>I AM VIZION</h1>
+        <h1>SAHR JOHN II</h1>
         <p className="summary">
           The sentinel is the threshold. Single click keeps the scene response.
           Double click the X in the face to enter the mind behind it.
