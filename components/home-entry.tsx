@@ -2,7 +2,7 @@
 
 import Spline from "@splinetool/react-spline/next";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const sentinelScene =
   "https://prod.spline.design/nBcxZMDF-GCtzXY6/scene.splinecode";
@@ -10,6 +10,7 @@ const sentinelScene =
 export function HomeEntry() {
   const router = useRouter();
   const [isEntering, setIsEntering] = useState(false);
+  const sceneRef = useRef<HTMLDivElement | null>(null);
 
   const enterSite = () => {
     if (isEntering) {
@@ -23,9 +24,27 @@ export function HomeEntry() {
     }, 900);
   };
 
+  useEffect(() => {
+    const sceneElement = sceneRef.current;
+
+    if (!sceneElement) {
+      return;
+    }
+
+    const handleDoubleClick = () => {
+      enterSite();
+    };
+
+    sceneElement.addEventListener("dblclick", handleDoubleClick);
+
+    return () => {
+      sceneElement.removeEventListener("dblclick", handleDoubleClick);
+    };
+  }, [isEntering]);
+
   return (
     <main className={`home-shell${isEntering ? " is-entering" : ""}`}>
-      <div className="scene-layer" aria-hidden="true">
+      <div ref={sceneRef} className="scene-layer" aria-hidden="true">
         <Spline scene={sentinelScene} />
       </div>
 
@@ -36,23 +55,19 @@ export function HomeEntry() {
         <p className="eyebrow">Home</p>
         <h1>I AM VIZION</h1>
         <p className="summary">
-          The sentinel is the threshold. The X in the face is the mark that
-          opens the mind behind it.
+          The sentinel is the threshold. Single click keeps the scene response.
+          Double click the X in the face to enter the mind behind it.
         </p>
       </section>
 
-      <button
-        type="button"
-        className="enter-target"
-        onClick={enterSite}
-        aria-label="Enter the site through the X on the sentinel face"
-      >
+      <section className="enter-target" aria-label="Entrance instructions">
         <span className="target-kicker">X marks the spot</span>
-        <span className="target-title">Click the X to enter</span>
+        <span className="target-title">Double click the X to enter</span>
         <span className="target-copy">
-          Pass through the sentinel face and enter the brain-space archive.
+          The first click can trigger the sentinel animation. The second opens
+          the About brain scene.
         </span>
-      </button>
+      </section>
 
       <div className="transition-gate" aria-hidden="true">
         <div className="transition-core" />
