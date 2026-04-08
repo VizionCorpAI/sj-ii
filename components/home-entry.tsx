@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { SceneMenu } from "@/components/scene-menu";
 
 const sentinelScene =
-  "https://prod.spline.design/nBcxZMDF-GCtzXY6/scene.splinecode";
+  "/spline/home-sentinel.splinecode";
 
 export function HomeEntry() {
   const router = useRouter();
