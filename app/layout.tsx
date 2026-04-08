@@ -2,13 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "VIZION | Inner Cosmos",
-  description:
-    "A 3D personal portfolio where systems, creativity, and identity orbit inside a crystal mind."
+  title: "VIZION",
+  description: "A cinematic 3D portfolio entrypoint built around the sentinel.",
 };
 
 export default function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
