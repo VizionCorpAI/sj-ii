@@ -27,6 +27,7 @@ function scalePosition(position: [number, number, number]): [number, number, num
 
 export function SceneStage() {
   const introPhase = useSceneStore((state) => state.introPhase);
+  const introDismissed = useSceneStore((state) => state.introDismissed);
   const reducedMotion = useSceneStore((state) => state.reducedMotion);
   const isMobile = useSceneStore((state) => state.isMobile);
   const setIntroPhase = useSceneStore((state) => state.setIntroPhase);
@@ -96,6 +97,38 @@ export function SceneStage() {
       tl.kill();
     };
   }, [camera, dismissIntro, introPhase, isMobile, reducedMotion, setIntroPhase]);
+
+  useEffect(() => {
+    if (!introDismissed || introPhase !== "humanoid") {
+      return;
+    }
+
+    const tl = gsap.timeline();
+
+    tl.to(camera.position, {
+      duration: reducedMotion ? 0.35 : isMobile ? 1.1 : 1.6,
+      x: 0,
+      y: 0.6,
+      z: 8.25,
+      ease: "power2.inOut"
+    });
+
+    if (groupRef.current) {
+      tl.to(
+        groupRef.current.rotation,
+        {
+          duration: reducedMotion ? 0.3 : 1.4,
+          y: 0,
+          ease: "sine.inOut"
+        },
+        0
+      );
+    }
+
+    return () => {
+      tl.kill();
+    };
+  }, [camera, introDismissed, introPhase, isMobile, reducedMotion]);
 
   useFrame((state, delta) => {
     const elapsed = state.clock.getElapsedTime();

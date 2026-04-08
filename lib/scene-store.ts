@@ -8,6 +8,7 @@ interface SceneActions {
   selectNode: (nodeId: string | null, zone?: Zone | "all") => void;
   hoverNode: (nodeId: string | null) => void;
   returnToCore: () => void;
+  returnToHome: () => void;
   dismissIntro: () => void;
   setReducedMotion: (value: boolean) => void;
   setIsMobile: (value: boolean) => void;
@@ -45,6 +46,15 @@ export const useSceneStore = create<SceneStore>((set) => ({
       selectedNodeId: null,
       focusZone: "core"
     }),
+  returnToHome: () =>
+    set((state) => ({
+      selectedNodeId: null,
+      hoveredNodeId: null,
+      focusZone: "all",
+      introPhase: "humanoid",
+      cameraMode: "scripted",
+      introDismissed: state.introDismissed
+    })),
   dismissIntro: () => {
     if (typeof window !== "undefined") {
       window.localStorage.setItem("vizion-intro-dismissed", "true");

@@ -9,10 +9,12 @@ export function SceneHud() {
   const introPhase = useSceneStore((state) => state.introPhase);
   const selectedNodeId = useSceneStore((state) => state.selectedNodeId);
   const returnToCore = useSceneStore((state) => state.returnToCore);
+  const returnToHome = useSceneStore((state) => state.returnToHome);
   const dismissIntro = useSceneStore((state) => state.dismissIntro);
   const selectNode = useSceneStore((state) => state.selectNode);
   const isMobile = useSceneStore((state) => state.isMobile);
   const focusZone = useSceneStore((state) => state.focusZone);
+  const introDismissed = useSceneStore((state) => state.introDismissed);
 
   const selectedNode = sceneNodes.find((node) => node.id === selectedNodeId) ?? null;
   const navNodes = sceneNodes.filter((node) =>
@@ -48,14 +50,14 @@ export function SceneHud() {
             <span className={styles.eyebrow}>Forehead crystal online</span>
             <h1>Enter the inner cosmos.</h1>
             <p>
-              A procedural humanoid opens into a navigable map of systems, art, identity,
+              A sentinel opens into a navigable map of systems, art, identity,
               and memory.
             </p>
             <div className={styles.actions}>
               <button onClick={dismissIntro} type="button">
-                Skip intro
+                {introDismissed ? "Enter universe" : "Skip intro"}
               </button>
-              <span>Auto-sequence will continue in a moment.</span>
+              <span>{introDismissed ? "Return to the inner cosmos when ready." : "Auto-sequence will continue in a moment."}</span>
             </div>
           </motion.div>
         ) : null}
@@ -101,6 +103,9 @@ export function SceneHud() {
 
       <div className={styles.bottomBar}>
         <div className={styles.bottomActions}>
+          <button onClick={returnToHome} type="button">
+            Return to Sentinel
+          </button>
           <button onClick={returnToCore} type="button">
             Return to Core
           </button>
