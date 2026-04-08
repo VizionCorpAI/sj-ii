@@ -2,7 +2,7 @@ import Spline from "@splinetool/react-spline/next";
 import { SceneMenu } from "@/components/scene-menu";
 
 const aboutScene =
-  "https://prod.spline.design/8YbFAmab9awhpO1T/scene.splinecode";
+  "/spline/about-brain.splinecode";
 
 export default function AboutPage() {
   return (
