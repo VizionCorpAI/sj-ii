@@ -5,10 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { SceneMenu } from "@/components/scene-menu";
 import { SplineScene } from "@/components/spline-scene";
 
-const sentinelScene =
-  "/spline/home-sentinel.splinecode";
-const sentinelSceneFallback =
-  "https://prod.spline.design/nBcxZMDF-GCtzXY6/scene.splinecode";
+const sentinelScene = "/spline/home-sentinel.splinecode";
 
 export function HomeEntry() {
   const router = useRouter();
@@ -50,11 +47,7 @@ export function HomeEntry() {
       <SceneMenu current="home" />
 
       <div ref={sceneRef} className="scene-layer" aria-hidden="true">
-        <SplineScene
-          localScene={sentinelScene}
-          remoteScene={sentinelSceneFallback}
-          loadingLabel="Loading sentinel portal"
-        />
+        <SplineScene localScene={sentinelScene} loadingLabel="Loading sentinel portal" />
       </div>
 
       <div className="scene-vignette" aria-hidden="true" />

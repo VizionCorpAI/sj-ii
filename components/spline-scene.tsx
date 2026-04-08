@@ -6,40 +6,29 @@ import { useEffect, useState } from "react";
 type SplineSceneProps = {
   className?: string;
   localScene: string;
-  remoteScene: string;
   loadingLabel: string;
 };
 
 export function SplineScene({
   className,
   localScene,
-  remoteScene,
   loadingLabel,
 }: SplineSceneProps) {
-  const [activeScene, setActiveScene] = useState(localScene);
   const [hasLoaded, setHasLoaded] = useState(false);
-  const [isFallback, setIsFallback] = useState(false);
+  const [isSlowLoad, setIsSlowLoad] = useState(false);
 
   useEffect(() => {
-    setActiveScene(localScene);
     setHasLoaded(false);
-    setIsFallback(false);
+    setIsSlowLoad(false);
 
-    const fallbackTimer = window.setTimeout(() => {
-      setActiveScene((currentScene) => {
-        if (currentScene === remoteScene) {
-          return currentScene;
-        }
-
-        setIsFallback(true);
-        return remoteScene;
-      });
+    const slowLoadTimer = window.setTimeout(() => {
+      setIsSlowLoad(true);
     }, 6000);
 
     return () => {
-      window.clearTimeout(fallbackTimer);
+      window.clearTimeout(slowLoadTimer);
     };
-  }, [localScene, remoteScene]);
+  }, [localScene]);
 
   return (
     <div className={className}>
@@ -47,14 +36,14 @@ export function SplineScene({
         <div className="scene-loading" role="status" aria-live="polite">
           <span className="scene-loading__label">{loadingLabel}</span>
           <span className="scene-loading__meta">
-            {isFallback
-              ? "Switching to hosted scene delivery..."
+            {isSlowLoad
+              ? "Scene assets are heavy. Keep this page open while the 3D file finishes loading."
               : "Initializing local scene assets..."}
           </span>
         </div>
       ) : null}
 
-      <Spline scene={activeScene} onLoad={() => setHasLoaded(true)} />
+      <Spline scene={localScene} onLoad={() => setHasLoaded(true)} />
     </div>
   );
 }

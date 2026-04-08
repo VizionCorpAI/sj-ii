@@ -1,10 +1,7 @@
 import { SceneMenu } from "@/components/scene-menu";
 import { SplineScene } from "@/components/spline-scene";
 
-const aboutScene =
-  "/spline/about-brain.splinecode";
-const aboutSceneFallback =
-  "https://prod.spline.design/40GV1YVdKMYDv3J9/scene.splinecode";
+const aboutScene = "/spline/about-brain.splinecode";
 
 export default function AboutPage() {
   return (
@@ -12,11 +9,7 @@ export default function AboutPage() {
       <SceneMenu current="about" />
 
       <div className="scene-layer" aria-hidden="true">
-        <SplineScene
-          localScene={aboutScene}
-          remoteScene={aboutSceneFallback}
-          loadingLabel="Loading brain archive"
-        />
+        <SplineScene localScene={aboutScene} loadingLabel="Loading brain archive" />
       </div>
 
       <div className="scene-vignette about-vignette" aria-hidden="true" />
