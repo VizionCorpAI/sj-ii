@@ -76,6 +76,12 @@ body {
   font-size: 0.92rem;
 }
 
+.scene-loading--error {
+  background:
+    radial-gradient(circle at center, rgba(44, 12, 18, 0.26), rgba(2, 4, 9, 0.86)),
+    rgba(2, 4, 9, 0.74);
+}
+
 .scene-menu {
   position: absolute;
   top: 1.1rem;
