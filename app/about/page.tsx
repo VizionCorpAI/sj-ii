@@ -1,8 +1,10 @@
-import Spline from "@splinetool/react-spline/next";
 import { SceneMenu } from "@/components/scene-menu";
+import { SplineScene } from "@/components/spline-scene";
 
 const aboutScene =
   "/spline/about-brain.splinecode";
+const aboutSceneFallback =
+  "https://prod.spline.design/40GV1YVdKMYDv3J9/scene.splinecode";
 
 export default function AboutPage() {
   return (
@@ -10,7 +12,11 @@ export default function AboutPage() {
       <SceneMenu current="about" />
 
       <div className="scene-layer" aria-hidden="true">
-        <Spline scene={aboutScene} />
+        <SplineScene
+          localScene={aboutScene}
+          remoteScene={aboutSceneFallback}
+          loadingLabel="Loading brain archive"
+        />
       </div>
 
       <div className="scene-vignette about-vignette" aria-hidden="true" />

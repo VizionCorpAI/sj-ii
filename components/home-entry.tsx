@@ -1,12 +1,14 @@
 "use client";
 
-import Spline from "@splinetool/react-spline/next";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { SceneMenu } from "@/components/scene-menu";
+import { SplineScene } from "@/components/spline-scene";
 
 const sentinelScene =
   "/spline/home-sentinel.splinecode";
+const sentinelSceneFallback =
+  "https://prod.spline.design/nBcxZMDF-GCtzXY6/scene.splinecode";
 
 export function HomeEntry() {
   const router = useRouter();
@@ -48,7 +50,11 @@ export function HomeEntry() {
       <SceneMenu current="home" />
 
       <div ref={sceneRef} className="scene-layer" aria-hidden="true">
-        <Spline scene={sentinelScene} />
+        <SplineScene
+          localScene={sentinelScene}
+          remoteScene={sentinelSceneFallback}
+          loadingLabel="Loading sentinel portal"
+        />
       </div>
 
       <div className="scene-vignette" aria-hidden="true" />
@@ -61,15 +67,6 @@ export function HomeEntry() {
           The sentinel is the threshold. Single click keeps the scene response.
           Double click the X in the face to enter the mind behind it.
         </p>
-      </section>
-
-      <section className="enter-target" aria-label="Entrance instructions">
-        <span className="target-kicker">X marks the spot</span>
-        <span className="target-title">Double click the X to enter</span>
-        <span className="target-copy">
-          The first click can trigger the sentinel animation. The second opens
-          the About brain scene.
-        </span>
       </section>
 
       <div className="transition-gate" aria-hidden="true">
