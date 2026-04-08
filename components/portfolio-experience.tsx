@@ -5,6 +5,7 @@ import { MotionConfig } from "framer-motion";
 import { PanelOverlay } from "@/features/panels/panel-overlay";
 import { SceneHud } from "@/features/hud/scene-hud";
 import { CosmicScene } from "@/features/scene/cosmic-scene";
+import { SplineHome } from "@/features/scene/spline-home";
 import { useIsMobile } from "@/lib/use-is-mobile";
 import { useSceneStore } from "@/lib/scene-store";
 import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
@@ -27,6 +28,7 @@ export function PortfolioExperience() {
   return (
     <MotionConfig reducedMotion={reducedMotion ? "always" : "never"}>
       <main className={styles.shell}>
+        <SplineHome />
         <CosmicScene />
         <SceneHud />
         <PanelOverlay />

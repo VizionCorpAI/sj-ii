@@ -9,11 +9,12 @@ import styles from "@/styles/cosmic-scene.module.css";
 
 export function CosmicScene() {
   const cameraMode = useSceneStore((state) => state.cameraMode);
+  const introPhase = useSceneStore((state) => state.introPhase);
   const isMobile = useSceneStore((state) => state.isMobile);
   const reducedMotion = useSceneStore((state) => state.reducedMotion);
 
   return (
-    <div className={styles.canvasWrap}>
+    <div className={introPhase === "universe" ? styles.canvasWrap : styles.canvasWrapHidden}>
       <Canvas
         camera={{ fov: 52, near: 0.1, far: 140, position: [0, 0.3, 15.5] }}
         dpr={[1, 1.75]}

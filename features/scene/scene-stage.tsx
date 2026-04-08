@@ -4,17 +4,14 @@ import { useEffect, useMemo, useRef } from "react";
 import { Environment, Html, Lightformer, Line, Sparkles, Text } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { gsap } from "gsap";
-import { AdditiveBlending, Group, Object3D, Vector3 } from "three";
+import { AdditiveBlending, Group, Vector3 } from "three";
 import { sceneNodes } from "@/content/portfolio-data";
 import { useSceneStore } from "@/lib/scene-store";
 import { getColorByKey } from "@/lib/scene-utils";
 import type { SceneNode, Zone } from "@/lib/types";
 import {
   AsteroidRock,
-  CrystalPortalHalo,
   NodeModel,
-  PortalTunnel,
-  SentinelModel,
   SelectedMemoryShard
 } from "./scene-models";
 
@@ -28,17 +25,13 @@ function scalePosition(position: [number, number, number]): [number, number, num
 export function SceneStage() {
   const introPhase = useSceneStore((state) => state.introPhase);
   const introDismissed = useSceneStore((state) => state.introDismissed);
-  const reducedMotion = useSceneStore((state) => state.reducedMotion);
   const isMobile = useSceneStore((state) => state.isMobile);
-  const setIntroPhase = useSceneStore((state) => state.setIntroPhase);
-  const dismissIntro = useSceneStore((state) => state.dismissIntro);
+  const reducedMotion = useSceneStore((state) => state.reducedMotion);
   const selectNode = useSceneStore((state) => state.selectNode);
   const selectedNodeId = useSceneStore((state) => state.selectedNodeId);
   const hoveredNodeId = useSceneStore((state) => state.hoveredNodeId);
   const focusZone = useSceneStore((state) => state.focusZone);
   const groupRef = useRef<Group>(null);
-  const humanoidRef = useRef<Group>(null);
-  const portalRef = useRef<Object3D>(null);
   const hasStarted = useRef(false);
   const { camera } = useThree();
 
@@ -54,49 +47,9 @@ export function SceneStage() {
       camera.lookAt(0, 0, 0);
       return;
     }
-
-    const rotationProxy = { y: 0 };
-    const tl = gsap.timeline();
-
-    tl.call(() => setIntroPhase("boot"))
-      .to(camera.position, {
-        duration: 0.8,
-        x: 0,
-        y: 0.35,
-        z: 12
-      })
-      .call(() => setIntroPhase("humanoid"))
-      .to(camera.position, {
-        duration: reducedMotion ? 0.4 : isMobile ? 1.4 : 2.1,
-        x: 0,
-        y: 0.6,
-        z: 8.25,
-        ease: "power2.inOut"
-      })
-      .call(() => setIntroPhase("portal"))
-      .to(camera.position, {
-        duration: reducedMotion ? 0.35 : isMobile ? 1.3 : 2,
-        x: 0,
-        y: 0.1,
-        z: 1.6,
-        ease: "power3.in"
-      })
-      .to(rotationProxy, {
-        duration: 1.1,
-        y: 0.18,
-        ease: "sine.inOut",
-        onUpdate: () => {
-          if (groupRef.current) {
-            groupRef.current.rotation.y = rotationProxy.y;
-          }
-        }
-      })
-      .call(() => dismissIntro());
-
-    return () => {
-      tl.kill();
-    };
-  }, [camera, dismissIntro, introPhase, isMobile, reducedMotion, setIntroPhase]);
+    camera.position.set(0, 0.6, 9.4);
+    camera.lookAt(0, 0.55, 0);
+  }, [camera, introPhase]);
 
   useEffect(() => {
     if (!introDismissed || introPhase !== "humanoid") {
@@ -131,16 +84,6 @@ export function SceneStage() {
   }, [camera, introDismissed, introPhase, isMobile, reducedMotion]);
 
   useFrame((state, delta) => {
-    const elapsed = state.clock.getElapsedTime();
-
-    if (humanoidRef.current) {
-      humanoidRef.current.position.y = Math.sin(elapsed * 1.4) * 0.06;
-    }
-
-    if (portalRef.current) {
-      portalRef.current.scale.setScalar(1 + Math.sin(elapsed * 2.8) * 0.06);
-    }
-
     if (groupRef.current && introPhase === "universe") {
       groupRef.current.rotation.y += delta * 0.02;
     }
@@ -187,15 +130,6 @@ export function SceneStage() {
       </Environment>
 
       <group ref={groupRef}>
-        {introPhase !== "universe" ? (
-          <group ref={humanoidRef}>
-            <SentinelModel crystalRef={portalRef} />
-            <CrystalPortalHalo />
-            <PortalTunnel active={introPhase === "portal"} />
-            <PortalTransitionOverlay active={introPhase === "portal"} />
-          </group>
-        ) : null}
-
         {introPhase === "universe" ? (
           <group>
             <ZoneAtmospheres />
@@ -250,25 +184,6 @@ function ZoneAtmospheres() {
       />
       <HemisphereAura color="#9be8ff" position={[0, 0.1, -2.4]} scale={[6.8, 4.4, 1.8]} />
       <CorePulse />
-    </group>
-  );
-}
-
-function PortalTransitionOverlay({ active }: { active: boolean }) {
-  if (!active) {
-    return null;
-  }
-
-  return (
-    <group position={[0, 0.6, -2.5]}>
-      <mesh scale={[10, 6, 1]}>
-        <planeGeometry args={[1, 1]} />
-        <meshBasicMaterial color="#12070c" opacity={0.28} transparent />
-      </mesh>
-      <mesh scale={[4.2, 2.8, 1]}>
-        <planeGeometry args={[1, 1]} />
-        <meshBasicMaterial color="#ffb760" opacity={0.08} transparent />
-      </mesh>
     </group>
   );
 }

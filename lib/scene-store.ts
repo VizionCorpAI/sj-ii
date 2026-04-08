@@ -22,7 +22,7 @@ const seenIntro = hasWindow
   : false;
 
 export const useSceneStore = create<SceneStore>((set) => ({
-  introPhase: seenIntro ? "universe" : "boot",
+  introPhase: seenIntro ? "universe" : "humanoid",
   selectedNodeId: null,
   hoveredNodeId: null,
   cameraMode: seenIntro ? "orbit" : "scripted",
