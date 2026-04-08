@@ -3,6 +3,7 @@
 import Spline from "@splinetool/react-spline/next";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { SceneMenu } from "@/components/scene-menu";
 
 const sentinelScene =
   "https://prod.spline.design/nBcxZMDF-GCtzXY6/scene.splinecode";
@@ -44,6 +45,8 @@ export function HomeEntry() {
 
   return (
     <main className={`home-shell${isEntering ? " is-entering" : ""}`}>
+      <SceneMenu current="home" />
+
       <div ref={sceneRef} className="scene-layer" aria-hidden="true">
         <Spline scene={sentinelScene} />
       </div>
