@@ -55,8 +55,8 @@ export function HomeEntry() {
       <section className="hero-copy">
         <h1>SAHR JOHN II</h1>
         <p className="summary">
-          The sentinel is the threshold. Single click keeps the scene response.
-          Double click the X in the face to enter the mind behind it.
+          The sentinel is the gateway. Double click the X in the face to enter
+          the mind within.
         </p>
       </section>
 

@@ -28,7 +28,8 @@ body {
 }
 
 .home-shell,
-.about-shell {
+.about-shell,
+.skills-shell {
   position: relative;
   min-height: 100vh;
   overflow: clip;
@@ -144,6 +145,12 @@ body {
     linear-gradient(180deg, rgba(2, 4, 9, 0.16) 0%, rgba(2, 4, 9, 0.62) 100%);
 }
 
+.skills-vignette {
+  background:
+    radial-gradient(circle at center, transparent 10%, rgba(2, 4, 9, 0.22) 44%, rgba(2, 4, 9, 0.82) 100%),
+    linear-gradient(180deg, rgba(2, 4, 9, 0.1) 0%, rgba(2, 4, 9, 0.74) 100%);
+}
+
 .hero-copy {
   position: relative;
   z-index: 1;
@@ -152,8 +159,7 @@ body {
   min-height: 100vh;
   width: min(100%, 34rem);
   padding: 2rem 1.25rem 2.5rem;
-  margin-left: auto;
-  text-align: right;
+  text-align: left;
 }
 
 .about-copy {
@@ -166,6 +172,16 @@ body {
   margin-left: auto;
   padding: 2rem 1.25rem 2.5rem;
   text-align: right;
+}
+
+.skills-copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-content: end;
+  min-height: 100vh;
+  width: min(100%, 38rem);
+  padding: 2rem 1.25rem 2.5rem;
 }
 
 .about-panel {
@@ -220,6 +236,23 @@ body {
   padding-left: 1.1rem;
   color: var(--muted);
   line-height: 1.65;
+}
+
+.skills-grid {
+  position: absolute;
+  inset: auto 1.25rem 1.5rem auto;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 14rem));
+  gap: 0.9rem;
+}
+
+.skills-card {
+  padding: 1rem 1.05rem 1.1rem;
+  border: 1px solid rgba(116, 240, 255, 0.2);
+  border-radius: 1.4rem;
+  background: rgba(3, 8, 15, 0.48);
+  backdrop-filter: blur(18px);
 }
 
 .eyebrow {
@@ -330,8 +363,7 @@ body {
     width: min(100%, 20rem);
     padding: 1.25rem 1rem 1.5rem;
     align-content: end;
-    margin-left: auto;
-    text-align: right;
+    text-align: left;
   }
 
   .summary {
@@ -361,6 +393,12 @@ body {
     font-size: 0.78rem;
   }
 
+  .skills-copy {
+    width: 100%;
+    min-height: auto;
+    padding: 6rem 1rem 0;
+  }
+
   .about-panel {
     position: relative;
     inset: auto;
@@ -370,5 +408,13 @@ body {
 
   .about-panel--core {
     margin-top: 1.25rem;
+  }
+
+  .skills-grid {
+    position: relative;
+    inset: auto;
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    padding: 1rem;
   }
 }
