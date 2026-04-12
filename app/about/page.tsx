@@ -1,7 +1,17 @@
 import { SceneMenu } from "@/components/scene-menu";
 import { SplineScene } from "@/components/spline-scene";
 
-const aboutScene = "/spline/about-brain.splinecode";
+const aboutScene = "/spline/about-map.splinecode";
+
+const mapGuide = [
+  { label: "Logo", target: "Home" },
+  { label: "Brain", target: "About" },
+  { label: "Earth", target: "Hobbies" },
+  { label: "Neptune", target: "Contact" },
+  { label: "Uranus", target: "Tools" },
+  { label: "Saturn", target: "Experience" },
+  { label: "Mars", target: "Skills" },
+];
 
 export default function AboutPage() {
   return (
@@ -9,51 +19,22 @@ export default function AboutPage() {
       <SceneMenu current="about" />
 
       <div className="scene-layer" aria-hidden="true">
-        <SplineScene localScene={aboutScene} loadingLabel="Loading brain archive" />
+        <SplineScene localScene={aboutScene} loadingLabel="Loading navigation map" />
       </div>
 
       <div className="scene-vignette about-vignette" aria-hidden="true" />
 
-      <section className="about-copy">
-        <p className="eyebrow">About</p>
-        <h1>Inside the Crystal</h1>
-        <p className="summary">
-          The brain scene is the interior map: identity at the core,
-          engineering to the left, creativity to the right, and synthesis
-          running through the centerline.
-        </p>
-      </section>
-
-      <section className="about-panel about-panel--core">
-        <p className="panel-label">Core Signal</p>
-        <h2>I AM VIZION</h2>
-        <p>
-          This chamber holds the identity layer, mission, and the logic-art
-          union that drives the rest of the site.
-        </p>
-      </section>
-
-      <section className="about-panel about-panel--left">
-        <p className="panel-label">Left Hemisphere</p>
-        <h2>Systems and Engineering</h2>
-        <ul className="panel-list">
-          <li>Architecture</li>
-          <li>Cloud systems</li>
-          <li>DevOps and automation</li>
-          <li>Networking, security, observability</li>
+      <aside className="map-guide" aria-label="Navigation map guide">
+        <p className="map-guide__title">Scene Guide</p>
+        <ul className="map-guide__list">
+          {mapGuide.map((item) => (
+            <li key={item.label}>
+              <span>{item.label}</span>
+              <span>{item.target}</span>
+            </li>
+          ))}
         </ul>
-      </section>
-
-      <section className="about-panel about-panel--right">
-        <p className="panel-label">Right Hemisphere</p>
-        <h2>Creation and Philosophy</h2>
-        <ul className="panel-list">
-          <li>Music and visual art</li>
-          <li>Creative direction</li>
-          <li>Imagination and dream layer</li>
-          <li>Gallery and reflective work</li>
-        </ul>
-      </section>
+      </aside>
     </main>
   );
 }
