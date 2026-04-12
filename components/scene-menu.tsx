@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 type SceneMenuProps = {
-  current: "home" | "about" | "skills";
+  current: "home" | "about" | "skills" | "contact";
 };
 
 export function SceneMenu({ current }: SceneMenuProps) {
@@ -24,6 +24,12 @@ export function SceneMenu({ current }: SceneMenuProps) {
         className={`scene-menu__link${current === "skills" ? " is-active" : ""}`}
       >
         Skills
+      </Link>
+      <Link
+        href="/contact"
+        className={`scene-menu__link${current === "contact" ? " is-active" : ""}`}
+      >
+        Contact
       </Link>
     </nav>
   );

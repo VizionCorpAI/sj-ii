@@ -25,7 +25,6 @@ export default function AboutPage() {
       <div className="scene-vignette about-vignette" aria-hidden="true" />
 
       <aside className="map-guide" aria-label="Navigation map guide">
-        <p className="map-guide__title">Scene Guide</p>
         <ul className="map-guide__list">
           {mapGuide.map((item) => (
             <li key={item.label}>

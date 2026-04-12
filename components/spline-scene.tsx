@@ -43,11 +43,8 @@ class SceneErrorBoundary extends Component<
     if (this.state.hasError) {
       return (
         <div className="scene-loading scene-loading--error" role="alert">
-          <span className="scene-loading__label">{this.props.loadingLabel}</span>
-          <span className="scene-loading__meta">
-            The 3D scene failed to initialize. Use the top-right menu to keep
-            navigating while the scene asset is checked.
-          </span>
+          <span className="scene-loading__orb" aria-hidden="true" />
+          <span className="scene-sr-only">{this.props.loadingLabel} failed to initialize.</span>
         </div>
       );
     }
@@ -80,12 +77,10 @@ export function SplineScene({
   return (
     <div className={className}>
       {!hasLoaded ? (
-        <div className="scene-loading" role="status" aria-live="polite">
-          <span className="scene-loading__label">{loadingLabel}</span>
-          <span className="scene-loading__meta">
-            {isSlowLoad
-              ? "Scene assets are heavy. Keep this page open while the 3D file finishes loading."
-              : "Initializing local scene assets..."}
+        <div className="scene-loading" role="status" aria-live="polite" aria-label={loadingLabel}>
+          <span className="scene-loading__orb" aria-hidden="true" />
+          <span className="scene-sr-only">
+            {isSlowLoad ? `${loadingLabel} is still loading.` : `${loadingLabel} is loading.`}
           </span>
         </div>
       ) : null}
