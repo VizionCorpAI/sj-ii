@@ -19,11 +19,7 @@ export default function AboutPage() {
       <SceneMenu current="about" />
 
       <div className="scene-layer" aria-hidden="true">
-        <SplineScene
-          className="about-scene"
-          localScene={aboutScene}
-          loadingLabel="Loading navigation map"
-        />
+        <SplineScene localScene={aboutScene} loadingLabel="Loading navigation map" />
       </div>
 
       <div className="scene-vignette about-vignette" aria-hidden="true" />
