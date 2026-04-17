@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { Component, type ReactNode, useEffect, useState } from "react";
+import { Component, type ReactNode, useEffect, useRef, useState } from "react";
 
 const Spline = dynamic(() => import("@/components/spline-runtime"), {
   ssr: false,
@@ -12,6 +12,8 @@ type SplineSceneProps = {
   className?: string;
   localScene: string;
   loadingLabel: string;
+  desktopZoom?: number;
+  mobileZoom?: number;
 };
 
 type SceneBoundaryProps = {
@@ -57,13 +59,29 @@ export function SplineScene({
   className,
   localScene,
   loadingLabel,
+  desktopZoom = 1,
+  mobileZoom,
 }: SplineSceneProps) {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [isSlowLoad, setIsSlowLoad] = useState(false);
+  const splineAppRef = useRef<{ setZoom: (zoom: number) => void } | null>(null);
+
+  const applySceneZoom = () => {
+    const splineApp = splineAppRef.current;
+
+    if (!splineApp || typeof window === "undefined") {
+      return;
+    }
+
+    const isMobileViewport = window.matchMedia("(max-width: 700px)").matches;
+    const zoom = isMobileViewport ? mobileZoom ?? desktopZoom : desktopZoom;
+    splineApp.setZoom(zoom);
+  };
 
   useEffect(() => {
     setHasLoaded(false);
     setIsSlowLoad(false);
+    splineAppRef.current = null;
 
     const slowLoadTimer = window.setTimeout(() => {
       setIsSlowLoad(true);
@@ -73,6 +91,19 @@ export function SplineScene({
       window.clearTimeout(slowLoadTimer);
     };
   }, [localScene]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      applySceneZoom();
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [desktopZoom, mobileZoom]);
 
   return (
     <div className={`scene-root${className ? ` ${className}` : ""}`}>
@@ -87,7 +118,14 @@ export function SplineScene({
 
       <div className="scene-stage">
         <SceneErrorBoundary loadingLabel={loadingLabel}>
-          <Spline scene={localScene} onLoad={() => setHasLoaded(true)} />
+          <Spline
+            scene={localScene}
+            onLoad={(splineApp) => {
+              splineAppRef.current = splineApp as { setZoom: (zoom: number) => void };
+              applySceneZoom();
+              setHasLoaded(true);
+            }}
+          />
         </SceneErrorBoundary>
       </div>
     </div>
