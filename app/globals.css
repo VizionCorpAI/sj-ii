@@ -47,6 +47,7 @@ body {
 
 .scene-layer > div,
 .scene-layer canvas {
+  display: block;
   width: 100% !important;
   height: 100% !important;
 }

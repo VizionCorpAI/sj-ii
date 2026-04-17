@@ -12,6 +12,7 @@ export default function SkillsPage() {
         <SplineScene
           localScene={skillsScene}
           loadingLabel="Loading skills constellation"
+          mobileZoom={0.58}
         />
       </div>
 
