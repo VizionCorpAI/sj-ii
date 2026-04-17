@@ -10,6 +10,7 @@ export default function SkillsPage() {
 
       <div className="scene-layer" aria-hidden="true">
         <SplineScene
+          className="skills-scene"
           localScene={skillsScene}
           loadingLabel="Loading skills constellation"
         />

@@ -385,6 +385,18 @@ body {
     transform: translateY(-1.5%) scale(0.7);
   }
 
+  .about-scene .scene-stage {
+    width: 176%;
+    height: 176%;
+    transform: translateY(-2%) scale(0.58);
+  }
+
+  .skills-scene .scene-stage {
+    width: 168%;
+    height: 168%;
+    transform: translateY(-1%) scale(0.6);
+  }
+
   .hero-copy {
     width: min(100%, 20rem);
     padding: 1.25rem 1rem 1.5rem;
