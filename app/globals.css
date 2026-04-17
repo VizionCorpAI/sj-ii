@@ -13,18 +13,21 @@
 }
 
 html {
+  min-height: 100%;
   background: var(--bg);
 }
 
 body {
   margin: 0;
   min-height: 100vh;
+  min-height: 100dvh;
   background:
     radial-gradient(circle at top, rgba(49, 94, 147, 0.22), transparent 30%),
     radial-gradient(circle at bottom, rgba(25, 137, 145, 0.18), transparent 32%),
     var(--bg);
   color: var(--text);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
 }
 
 .home-shell,
@@ -43,9 +46,25 @@ body {
 .scene-layer {
   position: absolute;
   inset: 0;
+  overflow: hidden;
 }
 
-.scene-layer > div,
+.scene-root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.scene-stage {
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+}
+
+.scene-root,
+.scene-stage,
+.scene-stage > div,
+.scene-root > div,
 .scene-layer canvas {
   width: 100% !important;
   height: 100% !important;
@@ -347,6 +366,25 @@ body {
 }
 
 @media (max-width: 700px) {
+  .home-shell,
+  .about-shell,
+  .skills-shell,
+  .contact-shell {
+    min-height: 100dvh;
+  }
+
+  .scene-stage {
+    width: 136%;
+    height: 136%;
+    transform: scale(0.74);
+  }
+
+  .home-shell .scene-stage {
+    width: 142%;
+    height: 142%;
+    transform: translateY(-1.5%) scale(0.7);
+  }
+
   .hero-copy {
     width: min(100%, 20rem);
     padding: 1.25rem 1rem 1.5rem;

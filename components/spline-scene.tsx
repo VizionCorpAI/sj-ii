@@ -75,7 +75,7 @@ export function SplineScene({
   }, [localScene]);
 
   return (
-    <div className={className}>
+    <div className={`scene-root${className ? ` ${className}` : ""}`}>
       {!hasLoaded ? (
         <div className="scene-loading" role="status" aria-live="polite" aria-label={loadingLabel}>
           <span className="scene-loading__orb" aria-hidden="true" />
@@ -85,9 +85,11 @@ export function SplineScene({
         </div>
       ) : null}
 
-      <SceneErrorBoundary loadingLabel={loadingLabel}>
-        <Spline scene={localScene} onLoad={() => setHasLoaded(true)} />
-      </SceneErrorBoundary>
+      <div className="scene-stage">
+        <SceneErrorBoundary loadingLabel={loadingLabel}>
+          <Spline scene={localScene} onLoad={() => setHasLoaded(true)} />
+        </SceneErrorBoundary>
+      </div>
     </div>
   );
 }
